@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\User;
 
 class ClientController extends Controller
 {
@@ -26,7 +28,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+
+        return view('createClient', compact('users'));
     }
 
     /**
@@ -37,7 +41,20 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $user = User::find($data['user']);
+
+        $client = $user->clients()->create($data);
+
+        $client->address()->create([
+            'street' => $data['street'],
+            'number' => $data['number'],
+            'city' => $data['city'],
+            'state' => $data['state']
+        ]);
+
+        return redirect(route('cliente.exibir'));
     }
 
     /**
@@ -48,7 +65,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -59,7 +76,11 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::find($id);
+        $users = User::all();
+        $address = $client->address()->first();
+
+        return view('editClient', compact(['address', 'users', 'client']));
     }
 
     /**
@@ -71,7 +92,19 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::find($id);
+        $data = $request->all();
+
+        $client->update($data);
+        $client->address()->update([
+            'street' => $data['street'],
+            'number' => $data['number'],
+            'city' => $data['city'],
+            'state' => $data['state']
+        ]);
+
+        return redirect(route('cliente.exibir'));
+
     }
 
     /**
@@ -83,5 +116,12 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function endereco()
+    {
+        $address = Address::all();
+
+        return $address;
     }
 }

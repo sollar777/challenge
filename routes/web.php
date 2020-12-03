@@ -41,3 +41,12 @@ Route::delete('/grupos/destroy/{id}', [GroupController::class, 'destroy'])->name
 //clientes
 
 Route::get('/clientes', [ClientController::class, 'index'])->name('cliente.exibir');
+Route::get('/clientes/criar', [ClientController::class, 'create'])->name('cliente.criar');
+Route::get('/clientes/editar/{id}', [ClientController::class, 'edit'])->name('cliente.editar');
+Route::post('/clientes/create', [ClientController::class, 'store'])->name('cliente.enviar');
+Route::put('/clientes/edit/{id}', [ClientController::class, 'update'])->name('cliente.atualizar');
+
+//endereços
+
+
+

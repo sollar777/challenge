@@ -22,8 +22,7 @@
                 <td>{{$client->name}}</td>
                 <td>{{$client->cgc}}</td>
                 <td>{{$client->phone}}</td>
-                <td>{{$client->email}}</td>
-                      
+                <td>{{$client->email}}</td>              
             </tr>
         @endforeach
     </tbody>
@@ -31,3 +30,4 @@
 </table>
 
 @endsection
+
