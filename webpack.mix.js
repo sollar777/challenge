@@ -21,4 +21,6 @@ mix
     .sass('resources/views/scss/style.scss', 'public/style.css')
 
     .scripts('node_modules/jquery/dist/jquery.js', 'public/jquery.js')
-    .scripts('node_modules/bootstrap/dist/js/bootstrap.bundle.js', 'public/bootstrap.js');
+    .scripts('node_modules/bootstrap/dist/js/bootstrap.bundle.js', 'public/bootstrap.js')
+    .scripts('resources/js/funcoes/jquery_mask.js', 'public/funcoes/jquery_mask.js')
+    .scripts('resources/js/funcoes/validacao.js', 'public/funcoes/validacao.js');

@@ -14,7 +14,7 @@
 
         <div class="form-group">
             <label>CPF/CNPJ</label>
-            <input type="text" name="cgc" class="form-control" value="{{$client->cgc}}">
+            <input type="text" name="cgc" class="form-control teste" id="CPF" value="{{$client->cgc}}">
         </div>
 
         <div class="form-group">
@@ -62,7 +62,6 @@
         <div>
             <button type="submit" class="btn btn-success">Salvar</button>
         </div>
-
 
     </form>
 

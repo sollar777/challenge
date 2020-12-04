@@ -115,13 +115,11 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::find($id);
+
+        $client->destroy();
+
+        return redirect()->route('cliente.exibir');
     }
 
-    public function endereco()
-    {
-        $address = Address::all();
-
-        return $address;
-    }
 }
