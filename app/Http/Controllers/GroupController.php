@@ -37,12 +37,15 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+
         $dados = $request->all();
 
-        $groups = Group::create($dados)->all();
+        Group::create($dados)->all();
 
+        $response['success'] = true;
+        echo json_encode($response);
+        return;
 
-        return view('listGroups', compact('groups'));
     }
 
     /**
@@ -87,8 +90,20 @@ class GroupController extends Controller
      */
     public function destroy(Group $id)
     {
+        
+       if($id->products()->count() > 0){
+        $response['success'] = false;
+        $response['message'] = "Existe mercadorias cadastrada com esse grupo";
+        echo json_encode($response);
+        return;
+       }
+    
         $id->delete();
+        $response['success'] = true;
+        $response['message'] = "Grupo excluido com sucesso";
+        echo json_encode($response);
+        return;
 
-        return redirect(route('grupo.exibir'));
+        //return redirect(route('grupo.exibir'));
     }
 }

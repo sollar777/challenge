@@ -35,7 +35,7 @@ Route::delete('/produtos/destroy/{id}', [ProductController::class, 'destroy'])->
 Route::get('/grupos', [GroupController::class, 'index'])->name('grupo.exibir');
 Route::get('/grupos/criar', [GroupController::class, 'create'])->name('grupo.criar');
 Route::post('/grupos/criar', [GroupController::class, 'store'])->name('grupo.enviar');
-Route::delete('/grupos/destroy/{id}', [GroupController::class, 'destroy'])->name('grupo.excluir');
+Route::delete('/grupos/deletar/{id}', [GroupController::class, 'destroy'])->name('grupo.excluir');
 
 
 //clientes

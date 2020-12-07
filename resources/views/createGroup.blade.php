@@ -4,7 +4,7 @@
 @section('content')
 
     <h1>Criar Grupo</h1>
-    <form action="{{ route('grupo.enviar') }}" method="post">
+    <form action="{{ route('grupo.enviar') }}" method="post" class="form_group">
         @csrf
 
         <div class="form-group">
@@ -13,7 +13,7 @@
         </div>
 
         <div>
-            <button type="submit" class="btn btn-success">Criar Grupo</button>
+            <button type="submit" class="btn btn-success enviar" >Criar Grupo</button>
         </div>
 
 
