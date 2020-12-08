@@ -60,7 +60,11 @@ class ClientController extends Controller
             'state' => $data['state']
         ]);
 
-        return redirect()->route('cliente.exibir');
+        $response['success'] = true;
+        echo json_encode($response);
+        return;
+
+        //return redirect()->route('cliente.exibir');
     }
 
     /**
@@ -98,7 +102,9 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $client = $this->client->find($id);
+
         $data = $request->all();
 
         $client->update($data);
@@ -109,7 +115,11 @@ class ClientController extends Controller
             'state' => $data['state']
         ]);
 
-        return redirect()->route('cliente.exibir');
+        $response['success'] = true;
+        echo json_encode($response);
+        return;
+
+        //return redirect()->route('cliente.exibir');
 
     }
 
@@ -123,9 +133,15 @@ class ClientController extends Controller
     {
         $client = $this->client->find($id);
 
-        $client->destroy();
+        $client->address()->delete();
+        $client->delete();
 
-        return redirect()->route('cliente.exibir');
+        $response['success'] = true;
+        $response['message'] = "Cliente excluido com sucesso";
+        echo json_encode($response);
+        return;
+
+        //return redirect()->route('cliente.exibir');
     }
 
 }

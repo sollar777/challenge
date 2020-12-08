@@ -4,6 +4,8 @@
 
 <h1>Lista de Clientes</h1>
 
+<div class="alert alert-danger d-none messageBox-clientRemove" role="alert"></div>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -25,14 +27,14 @@
                 <td>{{$client->phone}}</td>
                 <td>{{$client->email}}</td>    
                 <td>
-                    <form action="{{route('cliente.destroy', ['id' => $client->id])}}" method="post">
+                    <form action="" class="teste-form" 
+                        value="{{$client->id}}" method="">
                         @csrf
-                        @method('delete')
                         <a href="{{route('cliente.editar', ['id' => $client->id])}}" class="btn btn-sm btn-primary">
                             Editar
                         </a>
-                        <input type="hidden" name="id" value="{{ $client->id }}">
-                        <input type="submit" class="btn btn-sm btn-danger" value="Remover">
+                        <input type="hidden" name="id" value="{{ $client->id }}" class="btn_remover_id">
+                        <input type="submit" class="btn btn-sm btn-danger btn_remover_client" value="Remover">
                     </form>
                 </td>          
             </tr>

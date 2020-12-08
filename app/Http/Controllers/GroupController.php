@@ -97,6 +97,8 @@ class GroupController extends Controller
         echo json_encode($response);
         return;
        }
+
+    
     
         $id->delete();
         $response['success'] = true;
@@ -104,6 +106,5 @@ class GroupController extends Controller
         echo json_encode($response);
         return;
 
-        //return redirect(route('grupo.exibir'));
     }
 }

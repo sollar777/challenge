@@ -4,9 +4,11 @@
 @section('content')
 
     <h1>Editar Cliente</h1>
-    <form action="{{ route('cliente.atualizar', ['id' => $client->id]) }}" method="post">
+
+    <div class="alert alert-danger d-none messageBox-clientEdit" role="alert"></div>
+
+    <form action="" method="" class="form_client_edit">
         @csrf
-        @method('PUT')
         <div class="form-group">
             <label>Nome do Cliente</label>
             <input type="text" name="name" class="form-control" value="{{$client->name}}">
@@ -60,7 +62,7 @@
         </div>
 
         <div>
-            <button type="submit" class="btn btn-success">Salvar</button>
+            <button type="submit" class="btn btn-success btn-editar-client" value="{{$client->id}}">Salvar</button>
         </div>
 
     </form>

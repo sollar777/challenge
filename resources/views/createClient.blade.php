@@ -4,9 +4,12 @@
 @section('content')
 
     <h1>Cadastrar Cliente</h1>
-    <form action="{{ route('cliente.enviar') }}" method="post">
-        @csrf
 
+    <div class="alert alert-danger d-none messageBox-client" role="alert"></div>
+
+    <form action=""  class="form_client" method="">
+        @csrf
+        
         <div class="form-group">
             <label>Nome do Cliente</label>
             <input type="text" name="name" class="form-control">

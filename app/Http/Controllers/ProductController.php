@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Group;
+use Exception;
 
 class ProductController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        
+
         return view('ListProducts', compact('products'));
     }
 
@@ -42,18 +43,27 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $data = $request->all();
-        $group = Group::find($data['group']);
+        try {
+            $data = $request->all();
+            $group = Group::find($data['group']);
 
-        $products = $group->products()->create([
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'price_cost' => (double)$data['price_cost'],
-            'price' => (double)$data['price'],
-            'amount' => (double)$data['amount']
-        ])->all();
+            $group->products()->create([
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'price_cost' => (float)$data['price_cost'],
+                'price' => (float)$data['price'],
+                'amount' => (float)$data['amount']
+            ])->all();
 
-        return view('ListProducts', compact('products'));
+
+            return response()->json([
+                    'success' => true,
+                    'message' => "produto cadastrado com sucesso!"
+                
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json(['erro: ' => $e->getMessage()], 401);
+        }
     }
 
     /**
@@ -97,9 +107,9 @@ class ProductController extends Controller
         $product->update([
             'name' => $data['name'],
             'description' => $data['description'],
-            'price_cost' => (double)$data['price_cost'],
-            'price' => (double)$data['price'],
-            'amount' => (double)$data['amount'],
+            'price_cost' => (float)$data['price_cost'],
+            'price' => (float)$data['price'],
+            'amount' => (float)$data['amount'],
             'group_id' => (int)$data['group']
         ]);
 
