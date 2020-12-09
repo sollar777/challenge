@@ -4,7 +4,10 @@
 @section('content')
 
 <h1>Editar Produto</h1>
-<form action="{{route('produto.edit', ['id' => $product->id])}}" method="post">
+
+<div class="alert alert-danger d-none messageBox-product-update" role="alert"></div>
+
+<form action="{{route('produto.edit', ['id' => $product->id])}}" method="post" class="form-edit" id="{{$product->id}}">
     @csrf
     @method('PUT')
     <div class="form-group">
@@ -45,7 +48,7 @@
     </div>
 
     <div>
-        <button type="submit" class="btn btn-success">Atualizar Produto</button>
+        <button type="submit" class="btn btn-success btn-edit">Atualizar Produto</button>
     </div>
 
 

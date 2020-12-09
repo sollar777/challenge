@@ -4,6 +4,8 @@
 
     <h1>Lista de Produtos</h1>
 
+    <div class="alert alert-danger d-none messageBox-product-remove" role="alert"></div>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -27,14 +29,17 @@
                     <td>{{ $product->amount }}</td>
                     <td>{{ $product->groups->name }}</td>
                     <td>
-                        <form action="{{ route('produto.excluir', ['id' => $product->id]) }}" method="post">
+                        <form action="{{ route('produto.excluir', ['id' => $product->id]) }}" method="post" 
+                            id="{{ $product->id }}">
                             @csrf
                             @method('delete')
-                            <a href="{{ route('produto.editar', ['id' => $product->id]) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('produto.editar', ['id' => $product->id]) }}" 
+                                class="btn btn-sm btn-primary btn-edit">
                                 Editar
                             </a>
                             <input type="hidden" name="id" value="{{ $product->id }}">
-                            <input type="submit" class="btn btn-sm btn-danger" value="Remover">
+                            <input type="submit" class="btn btn-sm btn-danger btn-remove" value="Remover" 
+                            id="{{ $product->id }}">
                         </form>
                     </td>
                 </tr>
@@ -42,5 +47,6 @@
         </tbody>
 
     </table>
+
 
 @endsection

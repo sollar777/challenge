@@ -163,4 +163,58 @@ $(".form-product-store").on("submit", function (e) {
     })
  })
 
+ $(".form-edit").on("submit", function (e) { 
+     e.preventDefault();
+
+     var id = $(this).attr("id");
+
+     $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $("input[name=_token").val()
+        }
+    })
+
+    $.ajax({
+        url: "/produtos/edit/" + id,
+        type: "put",
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function (response) { 
+            if(response.success === true){
+                window.location.href = "/produtos"
+            }else{
+                $(".messageBox-product-update").removeClass("d-none").html(response.erro);
+            }
+         }
+    })
+})
+
+    $(".btn-remove").on("click", function (e) { 
+        e.preventDefault();
+   
+        var id = $(this).attr("id");
+   
+        $.ajaxSetup({
+           headers: {
+               'X-CSRF-TOKEN': $("input[name=_token").val()
+           }
+       })
+   
+       $.ajax({
+           url: "/produtos/destroy/" + id,
+           type: "delete",
+           data: $(this).serialize(),
+           dataType: 'json',
+           success: function (response) { 
+               if(response.success === true){
+                   window.location.href = "/produtos"
+               }else{
+                   $(".messageBox-product-remove").removeClass("d-none").html(response.erro);
+               }
+            }
+       })
+
+  })
+
+
  // --------fim produtos----------------

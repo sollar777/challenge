@@ -57,9 +57,9 @@ class ProductController extends Controller
 
 
             return response()->json([
-                    'success' => true,
-                    'message' => "produto cadastrado com sucesso!"
-                
+                'success' => true,
+                'message' => "produto cadastrado com sucesso!"
+
             ], 200);
         } catch (Exception $e) {
             return response()->json(['erro: ' => $e->getMessage()], 401);
@@ -101,19 +101,27 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::where('id', $id)->first();
-        $data = $request->all();
+        try {
+            $product = Product::where('id', $id)->first();
+            $data = $request->all();
 
-        $product->update([
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'price_cost' => (float)$data['price_cost'],
-            'price' => (float)$data['price'],
-            'amount' => (float)$data['amount'],
-            'group_id' => (int)$data['group']
-        ]);
+            $product->update([
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'price_cost' => (float)$data['price_cost'],
+                'price' => (float)$data['price'],
+                'amount' => (float)$data['amount'],
+                'group_id' => (int)$data['group']
+            ]);
 
-        return redirect(route('produto.exibir'));
+            return response()->json([
+                'success' => true,
+                'message' => "produto atualizado com sucesso!"
+            ], 200);
+
+        } catch (Exception $e) {
+            return response()->json(['erro' => $e->getMessage()], 401);
+        }
     }
 
     /**
@@ -124,8 +132,20 @@ class ProductController extends Controller
      */
     public function destroy(Product $id)
     {
+        try{
+
         $id->delete();
 
-        return redirect(route('produto.exibir'));
+        return response()->json([
+                'success' => true,
+                'message' => "produto removido com sucesso!"
+            ], 200);
+
+        }
+        catch(Exception $e){
+            return response()->json([
+                'erro' => $e->getMessage()
+            ], 401);
+        }
     }
 }
