@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\VendasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,12 @@ Route::put('/clientes/edit/{id}', [ClientController::class, 'update'])->name('cl
 Route::delete('/clientes/destroy/{id}', [ClientController::class, 'destroy'])->name('cliente.destroy');
 
 //endereços
+
+//vendas
+
+Route::get('/vendas', [VendasController::class, 'index'])->name('vendas.exibir');
+Route::get('/vendas/criar', [VendasController::class, 'create'])->name('vendas.criar');
+Route::post('/vendas/criar', [VendasController::class, 'store'])->name('vendas.criar.venda');
 
 
 

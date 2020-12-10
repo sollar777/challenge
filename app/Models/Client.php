@@ -14,7 +14,8 @@ class Client extends Model
         'user_id',
         'cgc',
         'phone',
-        'email'
+        'email',
+        'clients_id'
     ];
 
     public function user()
@@ -25,6 +26,11 @@ class Client extends Model
     public function address()
     {
         return $this->hasMany(Address::class, 'client_id', 'id');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'clients_id', 'id');
     }
     
 }
