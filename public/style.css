@@ -21,8 +21,22 @@
   margin-top: 0.5rem;
 }
 
+.lb-cod-venda {
+  margin-top: 0.6rem;
+}
+
 #codVenda {
   border: none;
+  font-size: 30px;
+}
+
+#tot {
+  border: none;
+}
+
+.form_vendas_listagem_Itens {
+  margin-top: 5rem;
+  margin-bottom: 2rem;
 }
 
 /*!

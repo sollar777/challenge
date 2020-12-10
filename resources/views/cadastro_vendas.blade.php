@@ -14,7 +14,7 @@
             <div class="col-md-4">
                 <div class="row">
                     <div class="col-md-8">
-                        <label>
+                        <label class="lb-cod-venda">
                             <h3>Código da venda:</h3>
                         </label>
                     </div>
@@ -72,13 +72,11 @@
                     <button type="submit" class="btn btn-success btn-lg btn-enviar-vendas">Enviar</button>
                 </div>
             </div>
-            
-            
-     
+             
 
     </form>
 
-    <form action="" method="post" class="form_vandas_itens">
+    <form action="" method="post" class="form_vandas_itens d-none">
         @csrf
         <div class="row">
             <div class="col-md-4">
@@ -103,15 +101,43 @@
 
             <div class="col-md-2">
                 <label >Total</label>
-                <input type="text" class="form-control" name="Tot" id="" value="1" disabled>
+                <input type="text" class="form-control money" name="Tot" id="tot" value="1" disabled>
             </div>
 
             <div class="col-md-2">
-                <button type="submit" class="btn btn-sm btn-success form-control" id="btn-itens-vendas">Adicionar</button>
+                <input type="hidden" name="id" value="0" class="btn_id_vendas">
+                <button type="submit" class="btn btn-sm btn-success form-control" id="btn-itens-vendas">
+                    Adicionar
+                </button>
             </div>
 
         </div>
         
+    </form>
+
+    <form action="form-vendas-itens-list" class="form_vendas_listagem_Itens d-none">
+        <div class="row">
+
+            <div class="col-md-4">
+                <label >Produto</label>
+                <input type="text" class="form-control money" name="amount" id="" value="1">
+            </div>
+
+            <div class="col-md-2">
+                <label >Quantidade</label>
+                <input type="text" class="form-control money" name="amount" id="" value="1">
+            </div>
+
+            <div class="col-md-2">
+                <label >Preço</label>
+                <input type="text" class="form-control money" name="price" id="" value="1">
+            </div>
+
+            <div class="col-md-2">
+                <label >Total</label>
+                <input type="text" class="form-control money" name="Tot" id="tot" value="1" disabled>
+            </div>
+        </div>
     </form>
 
 @endsection
