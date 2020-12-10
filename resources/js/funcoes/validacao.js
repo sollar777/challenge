@@ -218,3 +218,25 @@ $(".form-product-store").on("submit", function (e) {
 
 
  // --------fim produtos----------------
+
+
+$(".form_vendas_criar").on("submit", function (e) { 
+    e.preventDefault();
+
+    $.ajax({
+        url: "/vendas/criar",
+        type: 'post',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response){
+            if(response.success === true){
+                codVenda = $("#codVenda").html(response.id);
+                if(codVenda.html() > 0) {
+                    $(".form_vandas_itens").removeClass('d-none');
+                }
+            }else {
+                console.log('erro');
+            }
+        }
+    })
+ })
