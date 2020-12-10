@@ -2,12 +2,12 @@
 
 @section('content')
 
-    <h1>Cadastro de Vendas</h1>
+    <h1 class="titulo-vendas">Cadastro de Vendas</h1>
 
     <form action="" method="post" class="form_vendas_criar">
         @csrf
 
-        <div class="row">
+        <div class="row div-row-1-vendas">
             <div class="col-md-8">
 
             </div>
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row div-row-vendas">
 
             <div class="col-md-3">
                 <label>Data da Venda</label>
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row div-row-vendas">
 
             <div class="col-md-6">
                 <label>Empresa</label>
@@ -67,14 +67,51 @@
                 <input type="text" name="obs" class="form-control">
             </div>
         </div>
-
-                <button type="submit" class="btn btn-success btn-enviar-vendas">Enviar</button>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-success btn-lg btn-enviar-vendas">Enviar</button>
+                </div>
+            </div>
+            
+            
      
 
     </form>
 
-    <form action="" method="post" class="d-none form_vandas_itens">
-        <label >teste</label>
+    <form action="" method="post" class="form_vandas_itens">
+        @csrf
+        <div class="row">
+            <div class="col-md-4">
+                <label>Produto</label>
+                <select name="product_id" class="form-control">
+                    <option value=""></option>
+                    @foreach ($products as $product)
+                        <option value="{{$product->id}}">{{$product->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label >Quantidade</label>
+                <input type="text" class="form-control money" name="amount" id="" value="1">
+            </div>
+
+            <div class="col-md-2">
+                <label >Preço</label>
+                <input type="text" class="form-control money" name="price" id="" value="1">
+            </div>
+
+            <div class="col-md-2">
+                <label >Total</label>
+                <input type="text" class="form-control" name="Tot" id="" value="1" disabled>
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-sm btn-success form-control" id="btn-itens-vendas">Adicionar</button>
+            </div>
+
+        </div>
+        
     </form>
 
 @endsection

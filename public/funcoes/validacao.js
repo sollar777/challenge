@@ -1,4 +1,5 @@
-$("#CPF").mask('000.000.000-00');
+$("#CPF").mask('000-000.000-00');
+$(".money").mask('#.##0,00', {reverse: true});
 
 // cadastrar grupos
 
@@ -240,3 +241,5 @@ $(".form_vendas_criar").on("submit", function (e) {
         }
     })
  })
+
+ // desabilitar um campo $(".campo").attr("disabled", true pra desativar ou false pra ativar)

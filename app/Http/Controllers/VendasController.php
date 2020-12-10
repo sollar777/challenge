@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Product;
 use App\Models\Store;
 use App\Models\User;
 use Carbon\Carbon;
@@ -32,9 +33,10 @@ class VendasController extends Controller
         $users = User::all(['id', 'name']);
         $stores = Store::all();
         $clients = Client::all();
+        $products = Product::all();
         $data_atual = CarbonImmutable::now()->isoFormat('DD/MM/YYYY');
 
-        return view('cadastro_vendas', compact('users', 'stores', 'clients','data_atual'));
+        return view('cadastro_vendas', compact('users', 'stores', 'clients','data_atual', 'products'));
     }
 
     /**

@@ -1,5 +1,30 @@
 @charset "UTF-8";
 
+.titulo-vendas {
+  text-align: center;
+}
+
+#btn-itens-vendas {
+  margin-top: 2rem;
+}
+
+.btn-enviar-vendas {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.div-row-1-vendas {
+  margin-top: 3rem;
+}
+
+.div-row-vendas {
+  margin-top: 0.5rem;
+}
+
+#codVenda {
+  border: none;
+}
+
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
