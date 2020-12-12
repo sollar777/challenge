@@ -11,6 +11,14 @@ class Sale_iten extends Model
 
     protected $table = 'sales_items';
 
+    protected $fillable = [
+        'sales_id',
+        'product_id',
+        'name_product',
+        'price',
+        'amount'
+    ];
+
     public function sale(){
         return $this->belongsTo(Sale::class, 'sales_id', 'id');
     }

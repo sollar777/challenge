@@ -14,6 +14,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $products = Product::all();
@@ -74,8 +75,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::where('id', $id)->first();
-
+        $product = Product::where("id", $id)->first();
         $groups = Group::all();
 
         return view('editProduct', compact('product', 'groups'));
@@ -108,10 +108,10 @@ class ProductController extends Controller
             $product->update([
                 'name' => $data['name'],
                 'description' => $data['description'],
-                'price_cost' => (float)$data['price_cost'],
-                'price' => (float)$data['price'],
-                'amount' => (float)$data['amount'],
-                'group_id' => (int)$data['group']
+                'price_cost' => $data['price_cost'],
+                'price' => $data['price'],
+                'amount' => $data['amount'],
+                'group_id' => $data['group_id']
             ]);
 
             return response()->json([
@@ -148,4 +148,19 @@ class ProductController extends Controller
             ], 401);
         }
     }
+ 
+    public function findProduct($id)
+    {
+        try{
+            $product = Product::where("id", $id)->first();
+            $product['success'] = true;
+            return response()->json($product, 200);
+
+        }catch(Exception $e){
+            return response()->json([
+                'erro' => $e->getMessage()
+            ]);
+        }
+    }
+
 }

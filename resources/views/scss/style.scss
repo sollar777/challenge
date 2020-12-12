@@ -37,4 +37,29 @@
     margin-bottom: 2rem;
 }
 
+.listagem-itens-vendas{
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+}
+
+.h3-lista-produtos{
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.btn-modal-vendas-excluir{
+    margin-left: 1rem;
+}
+
+@media (max-width: 520px)
+{
+    .btn-modal-vendas-excluir{
+        margin-left: 0rem;
+    }
+}
+
 @import "~bootstrap/scss/bootstrap";
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';

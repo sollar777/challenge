@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="titulo-vendas">Cadastro de Vendas</h1>
+    <h1 class="titulo-vendas display-6">Cadastro de Vendas</h1>
 
     <form action="" method="post" class="form_vendas_criar">
         @csrf
@@ -29,7 +29,7 @@
 
             <div class="col-md-3">
                 <label>Data da Venda</label>
-                <input type="date" name="date" class="form-control data" value="">
+                <input type="date" name="date" class="form-control data-venda" value="">
             </div>
 
             <div class="col-md-6">
@@ -64,7 +64,7 @@
 
             <div class="col-md-6">
                 <label>Observação</label>
-                <input type="text" name="obs" class="form-control">
+                <input type="text" name="obs" class="form-control obs-vendas">
             </div>
         </div>
             <div class="row">
@@ -81,7 +81,7 @@
         <div class="row">
             <div class="col-md-4">
                 <label>Produto</label>
-                <select name="product_id" class="form-control">
+                <select name="product_id" class="form-control select-produtos-vendas">
                     <option value=""></option>
                     @foreach ($products as $product)
                         <option value="{{$product->id}}">{{$product->name}}</option>
@@ -91,17 +91,17 @@
 
             <div class="col-md-2">
                 <label >Quantidade</label>
-                <input type="text" class="form-control money" name="amount" id="" value="1">
+                <input type="text" class="form-control money quant-product" name="amount" value="1">
             </div>
 
             <div class="col-md-2">
                 <label >Preço</label>
-                <input type="text" class="form-control money" name="price" id="" value="1">
+                <input type="text" class="form-control money price-product" name="price" value="1">
             </div>
 
             <div class="col-md-2">
                 <label >Total</label>
-                <input type="text" class="form-control money" name="Tot" id="tot" value="1" disabled>
+                <input type="text" class="form-control money tot-product" name="Tot" id="vendas-tot" value="1" disabled>
             </div>
 
             <div class="col-md-2">
@@ -115,29 +115,46 @@
         
     </form>
 
-    <form action="form-vendas-itens-list" class="form_vendas_listagem_Itens d-none">
-        <div class="row">
+    <h3 class="h3-lista-produtos display-5 d-none">Lista de Produtos</h3>
+    <table class="table table-striped listagem-itens-vendas d-none">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Total</th>
+                <th>Editar/Excluir</th>
+            </tr>
+        </thead>
+        <tbody id="tr-lista-produtos-vendas">
+           
+        </tbody>
+    </table>
 
-            <div class="col-md-4">
-                <label >Produto</label>
-                <input type="text" class="form-control money" name="amount" id="" value="1">
-            </div>
-
-            <div class="col-md-2">
-                <label >Quantidade</label>
-                <input type="text" class="form-control money" name="amount" id="" value="1">
-            </div>
-
-            <div class="col-md-2">
-                <label >Preço</label>
-                <input type="text" class="form-control money" name="price" id="" value="1">
-            </div>
-
-            <div class="col-md-2">
-                <label >Total</label>
-                <input type="text" class="form-control money" name="Tot" id="tot" value="1" disabled>
-            </div>
+    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modalVendaEditProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Editar produto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" name="" id="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary">Salvar mudanças</button>
+          </div>
         </div>
-    </form>
+      </div>
+    </div>
+    
 
 @endsection
+
+

@@ -19,6 +19,7 @@
     <script src="{{ asset('jquery.js') }}"></script>
     <script src="{{ asset('bootstrap.js') }}"></script>
     <script src="{{ asset('funcoes/jquery_mask.js') }}"></script>
+    <script src="{{ asset('funcoes/uteis.js') }}"></script>
     <script src="{{ asset('funcoes/validacao.js') }}"></script>
 
 </body>

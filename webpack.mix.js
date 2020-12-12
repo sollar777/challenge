@@ -23,4 +23,5 @@ mix
     .scripts('node_modules/jquery/dist/jquery.js', 'public/jquery.js')
     .scripts('node_modules/bootstrap/dist/js/bootstrap.bundle.js', 'public/bootstrap.js')
     .scripts('resources/js/funcoes/jquery_mask.js', 'public/funcoes/jquery_mask.js')
+    .scripts('resources/js/funcoes/uteis.js', 'public/funcoes/uteis.js')
     .scripts('resources/js/funcoes/validacao.js', 'public/funcoes/validacao.js');

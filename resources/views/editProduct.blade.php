@@ -12,32 +12,34 @@
     @method('PUT')
     <div class="form-group">
         <label >Nome do Produto</label>
-        <input type="text" name="name" value="{{$product->name}}" class="form-control">
+        <input type="text" name="name" value="{{$product->name}}" class="form-control product-edit-name">
     </div>
 
     <div class="form-group">
         <label >Descrição</label>
-        <input type="text" name="description" value="{{$product->description}}" class="form-control">
+        <input type="text" name="description" value="{{$product->description}}" 
+        class="form-control product-edit-description">
     </div>
 
     <div class="form-group">
         <label >Preço de Compra</label>
-        <input type="text" name="price_cost" value="{{$product->price_cost}}" class="form-control">
+        <input type="text" name="price_cost" value="{{$product->price_cost}}" 
+        class="form-control money price-cost-product">
     </div>
 
     <div class="form-group">
         <label >Preço de Venda</label>
-        <input type="text" name="price" value="{{$product->price}}" class="form-control">
+        <input type="text" name="price" value="{{$product->price}}" class="form-control money price-product">
     </div>
 
     <div class="form-group">
         <label >Quantidade</label>
-        <input type="text" name="amount" value="{{$product->amount}}" class="form-control">
+        <input type="text" name="amount" value="{{$product->amount}}" class="form-control money quantidade-product">
     </div>
 
     <div class="form-group">
         <label >Grupo</label>
-        <select name="group" class="form-control">
+        <select name="group" class="form-control product-edit-group">
             <option value="{{$product->group_id}}">{{$product->groups->name}}</option>
             @foreach($groups as $group)
                 @if($group->id != $product->group_id)

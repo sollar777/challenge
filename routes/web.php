@@ -30,6 +30,8 @@ Route::get('/produtos/editar/{id}', [ProductController::class, 'show'])->name('p
 Route::put('/produtos/edit/{id}', [ProductController::class, 'update'])->name('produto.edit');
 Route::delete('/produtos/destroy/{id}', [ProductController::class, 'destroy'])->name('produto.excluir');
 
+Route::get('/produtos/pesquisa/ajax/{id}', [ProductController::class, 'findProduct'])->name('produto.findProduct');
+
 
 // grupos
 
@@ -55,6 +57,12 @@ Route::delete('/clientes/destroy/{id}', [ClientController::class, 'destroy'])->n
 Route::get('/vendas', [VendasController::class, 'index'])->name('vendas.exibir');
 Route::get('/vendas/criar', [VendasController::class, 'create'])->name('vendas.criar');
 Route::post('/vendas/criar', [VendasController::class, 'store'])->name('vendas.criar.venda');
+
+
+
+Route::post('/vendas/produtos/criar/', [VendasController::class, 'store_product'])->name('vendas.produtos.criar');
+
+
 
 
 
