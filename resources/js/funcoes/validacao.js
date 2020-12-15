@@ -277,10 +277,11 @@ $(".select-produtos-vendas").on("change", function (e) {
             dataType: 'json',
             success: function (response) {
                 if (response.success === true) {
-                    $(".price-product").attr("value", formatReal(response.price));
+                    $(".price-product").val(formatReal(response.price));
+                    $(".quant-product").val(1);
                     var quantidade = parseFloat($(".quant-product").val().replace(',', '.'));
                     var preco = parseFloat($(".price-product").val().replace(',', '.'));
-                    $(".tot-product").attr("value", (preco * quantidade).toLocaleString('pt-BR'));
+                    $(".tot-product").val((preco * quantidade).toLocaleString('pt-BR'));
                 } else {
 
                 }
@@ -290,12 +291,26 @@ $(".select-produtos-vendas").on("change", function (e) {
     }
 })
 
+$(".modal-quantidade-produto").on("change", function () { 
+    var quantidade = parseFloat($(this).val().replace(',', '.'));
+    var preco = parseFloat($(".modal-preco-produto").val().replace(',', '.'));
+    var total = (quantidade * preco);
+    $(".modal-tot-produto").val(total.toLocaleString('pt-BR'));
+ })
+
+ $(".modal-preco-produto").on("change", function () { 
+    var preco = parseFloat($(this).val().replace(',', '.'));
+    var quantidade = parseFloat($(".modal-quantidade-produto").val().replace(',', '.'));
+    var total = (quantidade * preco);
+    $(".modal-tot-produto").val(total.toLocaleString('pt-BR'));
+ })
+
 $(".quant-product").on("change", function (e) {
     if ($(".select-produtos-vendas").val() > 0) {
         var quantidade = parseFloat(formatReal($(this).val()).replace(',', '.'));
         var preco = parseFloat(formatReal($(".price-product").val()).replace(',', '.'));
         var total = (quantidade * preco);
-        $(".tot-product").attr("value", total.toLocaleString('pt-BR'));
+        $(".tot-product").val(total.toLocaleString('pt-BR'));
     }
 })
 
@@ -304,7 +319,7 @@ $(".price-product").on("change", function (e) {
         var quantidade = parseFloat(formatReal($(".quant-product").val()).replace(',', '.'));
         var preco = parseFloat(formatReal($(this).val()).replace(',', '.'));
         var total = (quantidade * preco);
-        $(".tot-product").attr("value", total.toLocaleString('pt-BR'));
+        $(".tot-product").val(total.toLocaleString('pt-BR'));
     }
 })
 
@@ -349,13 +364,14 @@ function modalEditarProduto(idvenda) {
         dataType: "json",
         success: function (response) {
             if (response.success === true) {
-                $(".modal-nome-produto").attr("value", response.name_product);
-                $(".modal-quantidade-produto").attr("value", response.amount);
-                $(".modal-preco-produto").attr("value", response.price);
+                $(".modal-produto-editarId").val(response.id);
+                $(".modal-nome-produto").val(response.name_product);
+                $(".modal-quantidade-produto").val(response.amount);
+                $(".modal-preco-produto").val(response.price);
                 var quantidade = parseFloat(formatReal($(".modal-quantidade-produto").val()).replace(",", "."));
                 var preco = parseFloat(formatReal($(".modal-preco-produto").val()).replace(",", "."));
                 var total = (quantidade * preco);
-                $(".modal-tot-produto").attr("value", total.toLocaleString('pt-BR'));
+                $(".modal-tot-produto").val(total.toLocaleString('pt-BR'));
             } else {
 
             }
@@ -410,12 +426,68 @@ function modalRemoverProduto(idProdutoVenda) {
 
 }
 
+$(".btn-cancelar-vendas").on("click", function (e) { 
+    e.preventDefault();
+
+    var id = $("#codVenda").html();
+
+    if(id > 0){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token").val()
+            }
+        })
+    }
+
+ })
+
 $(".form_vandas_itens").on("submit", function (e) {
     e.preventDefault();
 
     itens_vendas(popular_lista_vendas_itens);
 
 })
+
+$(".form-modal-editar-item-venda").on("submit", function (e) { 
+    e.preventDefault();
+
+    var id = $(".modal-produto-editarId").val();
+    var product_id = $(".hidden-modal-editar-item-produto").val();
+    var sales_id = $(".hidden-modal-editar-item-id-venda").val();
+    var amount = parseFloat(formatReal($(".modal-quantidade-produto").val()).replace(',', '.'));
+    var price = parseFloat(formatReal($(".modal-preco-produto").val()).replace(',', '.'));
+    var name_product = $(".modal-nome-produto").val();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $("input[name=_token").val()
+        }
+    })
+
+    $.ajax({
+        url: "/vendas/produtos/editar/" + id,
+        type: "put",
+        data: {
+            product_id: product_id,
+            sales_id: sales_id,
+            price: price,
+            amount: amount,
+            name_product: name_product
+        },
+        dataType: "json",
+    }).done(function (data) { 
+        $.each(data, function (e, element) { 
+            if(element.length > 0){
+                popular_lista_vendas_itens(element);
+                $(".btn-modal-fechar").trigger("click");
+            }else{
+                $("#tr-lista-produtos-vendas td").remove();
+            }
+         })
+     }).fail(function (e) { 
+         console.log("erro: " + e);
+      })
+ })
 
  // faltando adicionar as div sem os label na listagem do itens de vendas
 

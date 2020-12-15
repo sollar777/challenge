@@ -8,7 +8,7 @@
   margin-top: 2rem;
 }
 
-.btn-enviar-vendas {
+.btn-vendas {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
@@ -63,6 +63,10 @@
   width: 100%;
   border-bottom: 1px solid #000;
   margin-top: 2rem;
+}
+
+.div-lista-produtos-vendas {
+  margin-bottom: 5rem;
 }
 
 /*!

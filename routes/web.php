@@ -61,9 +61,14 @@ Route::post('/vendas/criar', [VendasController::class, 'store'])->name('vendas.c
 
 
 // vendas efetuadas
-Route::post('/vendas/produtos/criar/', [VendasEfetuadasController::class, 'store'])->name('vendas.produtos.criar');
-Route::get('/vendas/produtos/buscar/{id}', [VendasEfetuadasController::class, 'show'])->name('vendas.produtos.buscar');
-Route::delete('/vendas/produtos/deletar/{id}', [VendasEfetuadasController::class, 'destroy'])->name('vendas.produtos.deletar');
+Route::post('/vendas/produtos/criar/', [VendasEfetuadasController::class, 'store'])
+->name('vendas.produtos.criar');
+Route::get('/vendas/produtos/buscar/{id}', [VendasEfetuadasController::class, 'show'])
+->name('vendas.produtos.buscar');
+Route::delete('/vendas/produtos/deletar/{id}', [VendasEfetuadasController::class, 'destroy'])
+->name('vendas.produtos.deletar');
+Route::put('/vendas/produtos/editar/{id}', [VendasEfetuadasController::class, 'update'])
+->name('vendas.produtos.atualizar');
 
 
 

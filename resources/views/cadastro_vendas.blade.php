@@ -53,7 +53,7 @@
 
         <div class="row div-row-vendas">
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label>Empresa</label>
                 <select name="store_id" class="form-control">
                     @foreach ($stores as $store)
@@ -62,14 +62,19 @@
                 </select>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <label>Observação</label>
                 <input type="text" name="obs" class="form-control obs-vendas">
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <button type="submit" class="btn btn-success btn-lg btn-enviar-vendas">Enviar</button>
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success btn-enviar-vendas btn-vendas form-control">Salvar</button>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-danger btn-cancelar-vendas btn-vendas form-control">Cancelar</button>
             </div>
         </div>
 
@@ -77,6 +82,7 @@
 
     <form action="" method="post" class="form_vandas_itens d-none">
         @csrf
+        <input type="hidden" name="id" value="" class="modal-produto-editarId">
         <div class="row">
             <div class="col-md-4">
                 <label>Produto</label>
@@ -129,7 +135,7 @@
             </thead>
 
             <form action="" method="">
-                <input type="hidden" name="_token" class="teste_modal" value="{{csrf_token()}}">
+                <input type="hidden" name="_token" class="teste_modal" value="{{ csrf_token() }}">
                 <tbody id="tr-lista-produtos-vendas">
 
                 </tbody>
@@ -140,7 +146,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modalVendaEditProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade modal-principal-editar-produto" id="modalVendaEditProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -151,7 +157,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form action="" class="form-modal-editar-item-venda" id="">
+                        @csrf
                         <label>Produto</label>
                         <input type="text" name="name" class="form-control modal-nome-produto" style="border: none"
                             disabled>
@@ -172,12 +179,13 @@
                                     disabled>
                             </div>
                         </div>
-                    </form>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                    <button type="button" class="btn btn-secondary btn-modal-fechar" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary btn-modal-salvar-edicao">Salvar mudanças</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

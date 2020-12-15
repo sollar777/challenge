@@ -23,6 +23,8 @@ class CreateSalesTable extends Migration
             $table->string('obs')->nullable();
             $table->date('date');
             $table->decimal('discount', 10, 2);
+            $table->bit('salvo');
+            $table->bit('cancelado');
 
             $table->foreign('clients_id')->references('id')->on('clients');
             $table->foreign('store_id')->references('id')->on('stores');

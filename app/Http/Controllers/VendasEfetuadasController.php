@@ -68,7 +68,7 @@ class VendasEfetuadasController extends Controller
     public function show($id)
     {
         try {
-            $dados = Sale_iten::where("id", $id)->first();
+            $dados = Sale_iten::find($id);
             $dados["success"] = true;
             return response()->json($dados, 200);
         } catch (Exception $e) {
@@ -98,7 +98,20 @@ class VendasEfetuadasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $dados = $request->all();
+            $vendasEfetuadas = Sale_iten::find($id);
+            $vendasEfetuadas->update([
+                'price' => $dados['price'],
+                'amount' => $dados['amount']
+            ]);
+            $result = Sale_iten::where("sales_id", $vendasEfetuadas['sales_id'])->get();
+            return response()->json([$result], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'erro: ' => $e
+            ], 403);
+        }
     }
 
     /**
@@ -109,13 +122,13 @@ class VendasEfetuadasController extends Controller
      */
     public function destroy(Sale_iten $id)
     {
-        try{
+        try {
             $dados = $id;
             $venda = Sale::where("id", $id['sales_id'])->first();
             $dados->delete();
             $result = $venda->sales_items()->get();
-            return response()->json([$result], 200);     
-        }catch(Exception $e){
+            return response()->json([$result], 200);
+        } catch (Exception $e) {
             return response()->json([
                 "erro: " => $e
             ], 403);
