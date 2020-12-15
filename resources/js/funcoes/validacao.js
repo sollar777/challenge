@@ -252,8 +252,7 @@ $(".form_vendas_criar").on("submit", function (e) {
                     codVenda = $("#codVenda").html(response.id);
                     if (codVenda.html() > 0) {
                         $(".form_vandas_itens").removeClass('d-none');
-                        $(".listagem-itens-vendas").removeClass('d-none');
-                        $(".h3-lista-produtos").removeClass('d-none');
+                        $(".div-lista-produtos-vendas").removeClass('d-none');
                         if ($(".btn_id_vendas").val() == 0) {
                             $(".btn_id_vendas").attr("value", response.id);
                             $(".btn-enviar-vendas").attr("disabled", true);
@@ -279,8 +278,8 @@ $(".select-produtos-vendas").on("change", function (e) {
             success: function (response) {
                 if (response.success === true) {
                     $(".price-product").attr("value", formatReal(response.price));
-                    var quantidade = parseFloat($(".quant-product").val().replace(',','.'));
-                    var preco = parseFloat($(".price-product").val().replace(',','.'));
+                    var quantidade = parseFloat($(".quant-product").val().replace(',', '.'));
+                    var preco = parseFloat($(".price-product").val().replace(',', '.'));
                     $(".tot-product").attr("value", (preco * quantidade).toLocaleString('pt-BR'));
                 } else {
 
@@ -336,10 +335,32 @@ function itens_vendas(callback) {
             dataType: 'json',
         }).done(function (response) {
             callback(response);
-        }).fail(function () {
-            console.log('erro');
+        }).fail(function (erro) {
+            console.log('erro: ' + erro);
         })
     }
+}
+
+function modalEditarProduto(idvenda) {
+    var id = idvenda;
+    $.ajax({
+        url: "/vendas/produtos/buscar/" + id,
+        type: "get",
+        dataType: "json",
+        success: function (response) {
+            if (response.success === true) {
+                $(".modal-nome-produto").attr("value", response.name_product);
+                $(".modal-quantidade-produto").attr("value", response.amount);
+                $(".modal-preco-produto").attr("value", response.price);
+                var quantidade = parseFloat(formatReal($(".modal-quantidade-produto").val()).replace(",", "."));
+                var preco = parseFloat(formatReal($(".modal-preco-produto").val()).replace(",", "."));
+                var total = (quantidade * preco);
+                $(".modal-tot-produto").attr("value", total.toLocaleString('pt-BR'));
+            } else {
+
+            }
+        }
+    })
 }
 
 // adicionar funcao formatReal no preços da listagem
@@ -352,13 +373,41 @@ function popular_lista_vendas_itens(response) {
                 cols += "<td>" + response[a].amount + "</td>";
                 cols += "<td>" + response[a].price + "</td>";
                 cols += "<td>" + (response[a].price * response[a].amount).toLocaleString('pt-BR') + "</td>";
-                cols += "<td>" + "<a href='#' id='" + response[a].id + "' class='fas fa-edit btn btn-primary btn-modal-vendas-edit'" + 
-                "data-toggle='modal' data-target='#modalVendaEditProduct'>" + 
-                "<a href='#' id='" + response[a].id + "' class='fas fa-trash-alt btn btn-danger btn-modal-vendas-excluir'>" + "</td>";
+                cols += "<td>" + "<a href='javascript:func()' onclick='modalEditarProduto(" + response[a].id + ")' id='" + response[a].id + "' class='fas fa-edit btn btn-primary btn-modal-vendas-edit'" + 
+                "data-toggle='modal' data-target='#modalVendaEditProduct'></a>" + 
+                "<button type='submit' onclick='modalRemoverProduto(" + response[a].id + ")' class='fas fa-trash-alt btn btn-danger btn-modal-vendas-excluir'></button>" + "</td>";
                 cols += "</tr>";
         })
         $("#tr-lista-produtos-vendas").append(cols);
         
+}
+
+function modalRemoverProduto(idProdutoVenda) {
+    var id = idProdutoVenda;
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $(".teste_modal").val()
+            }
+        })
+
+        $.ajax({
+            url: "/vendas/produtos/deletar/" + id,
+            type: "delete",
+            dataType: "json",
+            success: function (response) { 
+                var i = 0;
+                $.each(response, function (e, element) { 
+                  if(element.length > 0){
+                    popular_lista_vendas_itens(element);
+                  }else{
+                    $("#tr-lista-produtos-vendas td").remove();
+                  }
+                 });
+                 
+             }
+        })
+
 }
 
 $(".form_vandas_itens").on("submit", function (e) {

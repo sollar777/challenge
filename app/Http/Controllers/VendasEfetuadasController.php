@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
 use App\Models\Product;
 use App\Models\Sale;
-use App\Models\Store;
-use App\Models\User;
-use Carbon\Carbon;
-use Carbon\CarbonImmutable;
+use App\Models\Sale_iten;
 use Exception;
 use Illuminate\Http\Request;
+use Symfony\Component\Process\ExecutableFinder;
 
-class VendasController extends Controller
+class VendasEfetuadasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,13 +28,7 @@ class VendasController extends Controller
      */
     public function create()
     {
-        $users = User::all(['id', 'name']);
-        $stores = Store::all();
-        $clients = Client::all();
-        $products = Product::all();
-        $data_atual = CarbonImmutable::now()->isoFormat('DD/MM/YYYY');
-
-        return view('cadastro_vendas', compact('users', 'stores', 'clients', 'data_atual', 'products'));
+        //
     }
 
     /**
@@ -50,18 +41,16 @@ class VendasController extends Controller
     {
         try {
             $dados = $request->all();
-            $client = Client::find($dados['clients_id']);
-
-            $result = $client->sales()->create([
-                'store_id' => $dados['store_id'],
-                'user_id' => $dados['user_id'],
-                'obs' => $dados['obs'],
-                'date' => $dados['date'],
-                'discount' => 0,
+            $sale = Sale::where('id', $dados['venda_id'])->first();
+            $product = Product::where('id', $dados['product_id'])->first();
+            $sale->sales_items()->create([
+                'product_id'    => $dados['product_id'],
+                'name_product'  => $product['name'],
+                'price'         => $dados['price'],
+                'amount'        => $dados['amount']
             ]);
-
-            $result['success'] = true;
-
+            $result = $sale->sales_items()->get();
+            //$result['success'] = true;
             return response()->json($result, 200);
         } catch (Exception $e) {
             return response()->json([
@@ -78,7 +67,15 @@ class VendasController extends Controller
      */
     public function show($id)
     {
-        
+        try {
+            $dados = Sale_iten::where("id", $id)->first();
+            $dados["success"] = true;
+            return response()->json($dados, 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'erro' => $e->getMessage()
+            ], 401);
+        }
     }
 
     /**
@@ -110,8 +107,18 @@ class VendasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Sale_iten $id)
     {
-        //
+        try{
+            $dados = $id;
+            $venda = Sale::where("id", $id['sales_id'])->first();
+            $dados->delete();
+            $result = $venda->sales_items()->get();
+            return response()->json([$result], 200);     
+        }catch(Exception $e){
+            return response()->json([
+                "erro: " => $e
+            ], 403);
+        }
     }
 }

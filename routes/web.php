@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VendasController;
+use App\Http\Controllers\VendasEfetuadasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +60,10 @@ Route::get('/vendas/criar', [VendasController::class, 'create'])->name('vendas.c
 Route::post('/vendas/criar', [VendasController::class, 'store'])->name('vendas.criar.venda');
 
 
-
-Route::post('/vendas/produtos/criar/', [VendasController::class, 'store_product'])->name('vendas.produtos.criar');
+// vendas efetuadas
+Route::post('/vendas/produtos/criar/', [VendasEfetuadasController::class, 'store'])->name('vendas.produtos.criar');
+Route::get('/vendas/produtos/buscar/{id}', [VendasEfetuadasController::class, 'show'])->name('vendas.produtos.buscar');
+Route::delete('/vendas/produtos/deletar/{id}', [VendasEfetuadasController::class, 'destroy'])->name('vendas.produtos.deletar');
 
 
 

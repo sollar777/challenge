@@ -1,65 +1,7 @@
-.titulo-vendas{
-    text-align: center;
-}
-
-#btn-itens-vendas{
-    margin-top: 2rem;
-}
-
-.btn-enviar-vendas{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-.div-row-1-vendas{
-    margin-top: 3rem;
-}
-
-.div-row-vendas{
-    margin-top: 0.5rem;
-}
-
-.lb-cod-venda{
-    margin-top: 0.6rem;
-}
-
-#codVenda{
-    border: none;
-    font-size: 30px;
-}
-
-#tot{
-    border: none;
-}
-
-.form_vendas_listagem_Itens{
-    margin-top: 5rem;
-    margin-bottom: 2rem;
-}
-
-.listagem-itens-vendas{
-    margin-top: 2rem;
-    margin-bottom: 5rem;
-}
-
-.h3-lista-produtos{
-    margin-top: 3rem;
-    text-align: center;
-}
-
-.btn-modal-vendas-excluir{
-    margin-left: 1rem;
-}
-
-@media (max-width: 520px)
-{
-    .btn-modal-vendas-excluir{
-        margin-left: 0rem;
-    }
-}
-
+@import 'resources/views/scss/vendas.scss';
 @import "~bootstrap/scss/bootstrap";
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
