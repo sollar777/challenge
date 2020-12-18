@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Group;
+use Exception;
 
 class GroupController extends Controller
 {
@@ -37,15 +38,17 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+            $dados = $request->all();
 
-        $dados = $request->all();
+            Group::create($dados)->all();
 
-        Group::create($dados)->all();
-
-        $response['success'] = true;
-        echo json_encode($response);
-        return;
-
+            $response['success'] = true;
+            return response()->json([$response], 200);
+        } catch (Exception $e) {
+            $response['success'] = false;
+            return response()->json([$response], 403);
+        }
     }
 
     /**
@@ -90,21 +93,18 @@ class GroupController extends Controller
      */
     public function destroy(Group $id)
     {
-        
-       if($id->products()->count() > 0){
-        $response['success'] = false;
-        $response['message'] = "Existe mercadorias cadastrada com esse grupo";
-        echo json_encode($response);
-        return;
-       }
 
-    
-    
+        if ($id->products()->count() > 0) {
+            $response['success'] = false;
+            $response['message'] = "Existe mercadorias cadastrada com esse grupo";
+            return response()->json([$response], 403);
+        }
+
+
+
         $id->delete();
         $response['success'] = true;
         $response['message'] = "Grupo excluido com sucesso";
-        echo json_encode($response);
-        return;
-
+        return response()->json([$response], 200);
     }
 }

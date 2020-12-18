@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Listagem dos Grupos</h1>
+<h1 class="h1-grupo">Listagem dos Grupos</h1>
 
 <table class="table table-striped">
 

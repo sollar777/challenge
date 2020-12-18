@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <h1 class="titulo-vendas display-6">Cadastro de Vendas</h1>
+    <h1 class="titulo-vendas display-6">Dados da Venda</h1>
 
-    <form action="" method="post" class="form_vendas_criar">
+    <form action="" method="post" class="form_vendas_editar">
         @csrf
 
         <div class="row div-row-1-vendas">
@@ -19,7 +19,7 @@
                         </label>
                     </div>
                     <div class="col-md-4 codVenda">
-                        <label class="form-control" id="codVenda">0</label>
+                        <label class="form-control" id="codVenda">{{$venda->id}}</label>
                     </div>
                 </div>
             </div>
@@ -29,24 +29,20 @@
 
             <div class="col-md-3">
                 <label class="form-group">Data da Venda</label>
-                <input type="date" name="date" class="form-control data-venda" value="">
+                <input type="date" name="date" class="form-control data-venda" value="{{$venda->date}}">
             </div>
 
             <div class="col-md-6">
                 <label class="form-group">Nome do Cliente</label>
-                <select name="clients_id" class="form-control">
-                    @foreach ($clients as $client)
-                        <option value="{{ $client->id }}">{{ $client->name }}</option>
-                    @endforeach
+                <select id="select-clientes-vendas-editar" name="clients_id" class="form-control select-clientes-vendas-editar">
+                    <option value="{{$venda->user_id}}">{{$venda->client->name}}</option>
                 </select>
             </div>
 
             <div class="col-md-3">
                 <label class="form-group">Vendedor</label>
                 <select name="user_id" class="form-control">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
+                        <option value="{{$venda->user_id}}">{{$venda->user->name}}</option>
                 </select>
             </div>
         </div>
@@ -56,15 +52,13 @@
             <div class="col-md-4">
                 <label class="form-group">Empresa</label>
                 <select name="store_id" class="form-control">
-                    @foreach ($stores as $store)
-                        <option value="{{ $store->id }}">{{ $store->name }}</option>
-                    @endforeach
+                        <option value="{{$venda->store_id}}">{{$venda->store->name}}</option>
                 </select>
             </div>
 
             <div class="col-md-8">
                 <label class="form-group">Observação</label>
-                <input type="text" name="obs" class="form-control obs-vendas">
+                <input type="text" name="obs" class="form-control obs-vendas" value="{{$venda->obs}}">
             </div>
         </div>
         <div class="row">
@@ -80,16 +74,16 @@
 
     </form>
 
-    <form action="" method="post" class="form_vandas_itens d-none">
+    <form action="" method="post" class="form_vandas_itens_editar">
         @csrf
         <input type="hidden" name="id" value="" class="modal-produto-editarId">
         <div class="row">
             <div class="col-md-4">
                 <label class="form-group">Produto</label>
                 <select name="product_id" class="form-control select-produtos-vendas">
-                    <option value=""></option>
-                    @foreach ($products as $product)
-                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                    <option value="0"></option>
+                    @foreach ($produtos as $produto)
+                        <option value="{{$produto->id}}">{{$produto->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -120,7 +114,7 @@
 
     </form>
 
-    <div class="div-lista-produtos-vendas d-none">
+    <div class="div-lista-produtos-vendas">
         <div id="linha"></div>
         <h3 class="h3-lista-produtos display-5">Lista de Produtos</h3>
         <table class="table table-sm table-striped listagem-itens-vendas">
@@ -152,7 +146,7 @@
     </div>
 
     <!-- Forma de pagamento -->
-    <div class="div-forma-pagamento-venda d-none">
+    <div class="div-forma-pagamento-venda">
         <div id="linha"></div>
         <h3 class="h3-lista-produtos">Total Venda</h3>
         <form action="" class="form-pagamento-vendas">
@@ -181,14 +175,7 @@
                 <div class="col-md-4">
                     <label class="form-group">Forma de Pagamento</label>
                     <select name="formaPagamento" id="" class="form-control select-forma-pagamento">
-                        <option value="0"></option>
-                        @if (count($pagamentos) > 0)
-                            @foreach ($pagamentos as $pagamento)
-                                <option value="{{ $pagamento->id }}">{{ $pagamento->name }}</option>
-                            @endforeach
-                        @else
-                            <option value="1">Espécie</option>
-                        @endif
+                            <option value="{{$bloquetes_venda->id}}">{{$bloquetes_venda->description}}</option>   
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -246,4 +233,8 @@
         </div>
     </div>
 
+    
+
 @endsection
+
+

@@ -1,7 +1,24 @@
 @charset "UTF-8";
 
+.h1-vendas {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.vendas-listagem {
+  margin-bottom: 2rem;
+}
+
 .titulo-vendas {
   text-align: center;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .titulo-vendas {
+    font-size: 2rem;
+  }
 }
 
 #btn-itens-vendas {
@@ -67,6 +84,41 @@
 
 .div-lista-produtos-vendas {
   margin-bottom: 5rem;
+}
+
+.form-pagamento-vendas {
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+}
+
+.h3-forma-pagamento {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.h1-cliente {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+/* Editar clientes */
+
+.btn-editar-client {
+  margin-top: 2rem;
+}
+
+/* Listagem de Clientes*/
+
+.btn-cadastro-client {
+  margin-top: 2rem;
+}
+
+.h1-grupo {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
 }
 
 /*!

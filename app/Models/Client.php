@@ -32,5 +32,36 @@ class Client extends Model
     {
         return $this->hasMany(Sale::class, 'clients_id', 'id');
     }
+
+    public function getNameAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords($value);
+    }
+
+    public function getEmailAttribute($value)
+    {
+        return strtolower($value);
+    }
+
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
+    public function setCgcAttribute($value)
+    {
+        $this->attributes['cgc'] = str_replace('.', '', str_replace('-', '', $value));
+    }
+
+    public function getCgcAttribute($value)
+    {
+        $value = str_replace('.', '', str_replace('-', '', $value));
+        return $value;
+    }
     
 }

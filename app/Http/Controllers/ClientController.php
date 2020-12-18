@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\User;
+use Exception;
 
 class ClientController extends Controller
 {
@@ -47,6 +48,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        try{
         $data = $request->all();
 
         $user = User::find($data['user']);
@@ -61,10 +63,11 @@ class ClientController extends Controller
         ]);
 
         $response['success'] = true;
-        echo json_encode($response);
-        return;
+        return response()->json([$response], 200);
+        }catch(Exception $e){
+            return response()->json([$response], 403);
+        }
 
-        //return redirect()->route('cliente.exibir');
     }
 
     /**
@@ -75,7 +78,6 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -86,7 +88,7 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client = $this->client->find($id); 
+        $client = $this->client->find($id);
         $users = User::all();
         $address = $client->address()->first();
 
@@ -102,22 +104,27 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try {
 
-        $client = $this->client->find($id);
+            $client = $this->client->find($id);
 
-        $data = $request->all();
+            $data = $request->all();
 
-        $client->update($data);
-        $client->address()->update([
-            'street' => $data['street'],
-            'number' => $data['number'],
-            'city' => $data['city'],
-            'state' => $data['state']
-        ]);
+            $client->update($data);
+            $client->address()->update([
+                'street' => $data['street'],
+                'number' => $data['number'],
+                'city' => $data['city'],
+                'state' => $data['state']
+            ]);
 
-        $response['success'] = true;
-        echo json_encode($response);
-        return;
+            $response['success'] = true;
+            return response()->json([$response], 200);
+        } catch (Exception $e) {
+            $response['success'] = false;
+            $response['message'] = "erro" + $e;
+            return response()->json([$response], 403);
+        }
 
         //return redirect()->route('cliente.exibir');
 
@@ -131,17 +138,21 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $client = $this->client->find($id);
+        try {
+            $client = $this->client->find($id);
 
-        $client->address()->delete();
-        $client->delete();
+            $client->address()->delete();
+            $client->delete();
 
-        $response['success'] = true;
-        $response['message'] = "Cliente excluido com sucesso";
-        echo json_encode($response);
-        return;
+            $response['success'] = true;
+            $response['message'] = "Cliente excluido com sucesso";
+            return response()->json([$response], 200);
+        } catch (Exception $e) {
+            $response['success'] = true;
+            $response['message'] = "erro" + $e;
+            return response()->json([$response], 403);
+        }
 
         //return redirect()->route('cliente.exibir');
     }
-
 }

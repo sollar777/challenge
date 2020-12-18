@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+    
     <div class="container">
         @yield('content')
     </div>
@@ -21,6 +21,8 @@
     <script src="{{ asset('funcoes/jquery_mask.js') }}"></script>
     <script src="{{ asset('funcoes/uteis.js') }}"></script>
     <script src="{{ asset('funcoes/validacao.js') }}"></script>
+
+    @yield('script')
 
 </body>
 

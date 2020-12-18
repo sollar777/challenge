@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VendasController;
 use App\Http\Controllers\VendasEfetuadasController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,58 +21,83 @@ use App\Http\Controllers\VendasEfetuadasController;
 */
 
 Route::get('/', function () {
-    return view('layout.app');
+    return view('layouts.app');
 });
 
 //produtos
 
-Route::get('/produtos', [ProductController::class, 'index'])->name('produto.exibir');
-Route::get('/produtos/criar', [ProductController::class, 'create'])->name('produto.criar');
-Route::post('/produtos/criar', [ProductController::class, 'store'])->name('produto.enviar');
-Route::get('/produtos/editar/{id}', [ProductController::class, 'show'])->name('produto.editar');
-Route::put('/produtos/edit/{id}', [ProductController::class, 'update'])->name('produto.edit');
-Route::delete('/produtos/destroy/{id}', [ProductController::class, 'destroy'])->name('produto.excluir');
+Route::prefix('produtos')->name('produto.')->namespace('produto')->group(function () {
 
-Route::get('/produtos/pesquisa/ajax/{id}', [ProductController::class, 'findProduct'])->name('produto.findProduct');
+    Route::get('/exibir', [ProductController::class, 'index'])->name('exibir');
+    Route::get('/criar', [ProductController::class, 'create'])->name('criar');
+    Route::get('/editar/{id}', [ProductController::class, 'show'])->name('editar');
+    Route::get('/pesquisa/ajax/{id}', [ProductController::class, 'findProduct'])->name('findProduct');
+    Route::post('/criar', [ProductController::class, 'store'])->name('produto.enviar');
+    Route::put('/edit/{id}', [ProductController::class, 'update'])->name('edit');
+    Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->name('excluir');
+});
+
+
 
 
 // grupos
 
-Route::get('/grupos', [GroupController::class, 'index'])->name('grupo.exibir');
-Route::get('/grupos/criar', [GroupController::class, 'create'])->name('grupo.criar');
-Route::post('/grupos/criar', [GroupController::class, 'store'])->name('grupo.enviar');
-Route::delete('/grupos/deletar/{id}', [GroupController::class, 'destroy'])->name('grupo.excluir');
+
+Route::prefix('/')->name('grupo.')->namespace('grupos')->group(function () {
+
+    Route::get('/grupos', [GroupController::class, 'index'])->name('exibir');
+    Route::get('/grupos/criar', [GroupController::class, 'create'])->name('criar');
+    Route::post('/grupos/criar', [GroupController::class, 'store'])->name('enviar');
+    Route::delete('/grupos/deletar/{id}', [GroupController::class, 'destroy'])->name('excluir');
+});
+
+
+
 
 
 //clientes
 
-Route::get('/clientes', [ClientController::class, 'index'])->name('cliente.exibir');
-Route::get('/clientes/criar', [ClientController::class, 'create'])->name('cliente.criar');
-Route::get('/clientes/editar/{id}', [ClientController::class, 'edit'])->name('cliente.editar');
-Route::post('/clientes/create', [ClientController::class, 'store'])->name('cliente.enviar');
-Route::put('/clientes/edit/{id}', [ClientController::class, 'update'])->name('cliente.atualizar');
-Route::delete('/clientes/destroy/{id}', [ClientController::class, 'destroy'])->name('cliente.destroy');
+Route::prefix('/')->name('clientes.')->namespace('clientes')->group(function () {
 
-//endereços
+    Route::get('/clientes', [ClientController::class, 'index'])->name('exibir');
+    Route::get('/clientes/criar', [ClientController::class, 'create'])->name('criar');
+    Route::get('/clientes/editar/{id}', [ClientController::class, 'edit'])->name('editar');
+    Route::post('/clientes/create', [ClientController::class, 'store'])->name('enviar');
+    Route::put('/clientes/edit/{id}', [ClientController::class, 'update'])->name('atualizar');
+    Route::delete('/clientes/destroy/{id}', [ClientController::class, 'destroy'])->name('destroy');
+});
+
+
+
 
 //vendas
 
-Route::get('/vendas', [VendasController::class, 'index'])->name('vendas.exibir');
-Route::get('/vendas/criar', [VendasController::class, 'create'])->name('vendas.criar');
-Route::post('/vendas/criar', [VendasController::class, 'store'])->name('vendas.criar.venda');
+Route::prefix('/')->name('vendas.')->namespace('vendas')->group(function () {
+
+    Route::get('/vendas', [VendasController::class, 'index'])->name('exibir');
+    Route::get('/vendas/criar', [VendasController::class, 'create'])->name('criar');
+    Route::get('/vendas/buscar/{id}', [VendasController::class, 'show'])->name('buscar');
+    Route::post('/vendas/criar', [VendasController::class, 'store'])->name('criar.venda');
+});
+
+
 
 
 // vendas efetuadas
-Route::post('/vendas/produtos/criar/', [VendasEfetuadasController::class, 'store'])
-->name('vendas.produtos.criar');
-Route::get('/vendas/produtos/buscar/{id}', [VendasEfetuadasController::class, 'show'])
-->name('vendas.produtos.buscar');
-Route::delete('/vendas/produtos/deletar/{id}', [VendasEfetuadasController::class, 'destroy'])
-->name('vendas.produtos.deletar');
-Route::put('/vendas/produtos/editar/{id}', [VendasEfetuadasController::class, 'update'])
-->name('vendas.produtos.atualizar');
+
+Route::prefix('/vendas/produtos')->name('vendas.produtos.')->namespace('vendas/produtos')->group(function () {
 
 
+    Route::post('/criar', [VendasEfetuadasController::class, 'store'])->name('criar');
+    Route::get('/buscar/{id}', [VendasEfetuadasController::class, 'show'])->name('buscar');
+    Route::get('/buscar/total/{id}', [VendasEfetuadasController::class, 'totalVendas'])->name('buscar.total');
+    Route::delete('/deletar/{id}', [VendasEfetuadasController::class, 'destroy'])->name('deletar');
+    Route::get('/editar/{id}', [VendasEfetuadasController::class, 'edit'])->name('editar');
+    Route::put('/editar/{id}', [VendasEfetuadasController::class, 'update'])->name('atualizar');
+
+});
 
 
+Auth::routes();
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');

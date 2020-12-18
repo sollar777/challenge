@@ -7,7 +7,7 @@
 
     <div class="alert alert-danger d-none messageBox-product-store" role="alert"></div>
 
-    <form action="{{ route('produto.enviar') }}" class="form-product-store" method="post">
+    <form action="" class="form-product-store" method="post">
         @csrf
 
         <div class="form-group">

@@ -33,4 +33,14 @@ class Sale extends Model
     {
         return $this->belongsTo(User::class, "user_id", "id");
     }
+
+    public function bloquetes()
+    {
+        return $this->hasMany(Bloquete::class, 'sales_id', 'id');
+    }
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'store_id', 'id');
+    }
 }
