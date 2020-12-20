@@ -14,7 +14,8 @@ class Bloquete extends Model
     protected $fillable = [
         'sales_id',
         'description',
-        'valor_parcela'
+        'valor_parcela',
+        'pagamento_id'
     ];
 
     public function sales()

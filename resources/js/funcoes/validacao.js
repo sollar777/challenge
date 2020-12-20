@@ -386,7 +386,7 @@ function popular_lista_vendas_itens(response) {
         cols += "<td>" + response[a].amount + "</td>";
         cols += "<td>" + response[a].price + "</td>";
         cols += "<td>" + (response[a].price * response[a].amount).toLocaleString('pt-BR') + "</td>";
-        cols += "<td>" + "<a href='javascript:func()' onclick='modalEditarProduto(" + response[a].id + ")' id='" + response[a].id + "' class='fas fa-edit btn btn-primary btn-modal-vendas-edit'" +
+        cols += "<td>" + "<a href='javascript:modalEditarProduto(" + response[a].id + ")' onclick='modalEditarProduto(" + response[a].id + ")' id='" + response[a].id + "' class='fas fa-edit btn btn-primary btn-modal-vendas-edit'" +
             "data-toggle='modal' data-target='#modalVendaEditProduct'></a>" +
             "<button type='submit' onclick='modalRemoverProduto(" + response[a].id + ")' class='fas fa-trash-alt btn btn-danger btn-modal-vendas-excluir'></button>" + "</td>";
         cols += "</tr>";
@@ -397,6 +397,10 @@ function popular_lista_vendas_itens(response) {
 
 function modalRemoverProduto(idProdutoVenda) {
     var id = idProdutoVenda;
+
+    $(".btn-modal-vendas-excluir").on("click", function (e) {
+        e.preventDefault();
+    })
 
     $.ajaxSetup({
         headers: {
@@ -598,3 +602,57 @@ $(".select-forma-pagamento").on("change", function () {
 })
 
 //----------------- vendas editar--------------------------//
+
+
+$(".select-forma-pagamento-editar").one("click", function (e) {
+
+    if ($(this).val() == "0") {
+        $.ajax({
+            url: "/pagamentos/exibir",
+            data: "get",
+            dataType: 'json'
+        }).done(function (data) {
+            $.each(data, function (e, element) {
+                popularSelectPagamento(element)
+            })
+        }).fail(function (e) {
+            console.log("erro: " + e)
+        })
+    } else {
+        $.ajax({
+            url: "/pagamentos/exibir",
+            data: "get",
+            dataType: 'json'
+        }).done(function (data) {
+            var id_select = $(".select-forma-pagamento-editar").val()
+            var name = $(".select-forma-pagamento-editar option:selected").text();
+            $.each(data, function (e, element) {
+                popularSelectPagamento(element, id_select, name)
+            })
+        }).fail(function (e) {
+            console.log("erro: " + e)
+        })
+    }
+})
+
+function popularSelectPagamento(data, id = 0, name = "") {
+    $(".select-forma-pagamento-editar option").remove();
+    var cols = ""
+    if (id == 0) {
+        cols = '<option value=0>' + '' + '</option>'
+        $.each(data, function (e) {
+            cols += "<option value='" + data[e].id + "'>" + data[e].name + "</option>"
+        })
+        $(".select-forma-pagamento-editar").append(cols);
+    } else {
+        cols = "<option value='" + id + "'>" + name + "</option>"
+        $.each(data, function (e) {
+            if (data[e].id != id) {
+                cols += "<option value='" + data[e].id + "'>" + data[e].name + "</option>"
+            }
+        })
+        $(".select-forma-pagamento-editar").append(cols);
+    }
+}
+
+//-----------faltando salvar a forma de pagamento -----------------

@@ -104,14 +104,26 @@ class VendasController extends Controller
      */
     public function show($id)
     {
-        $venda = Sale::find($id)->first();
-        $vendas_itens = $venda->sales_items()->get();
+        $venda = Sale::where('id', $id)->first();
+        $vendas_itens = DB::table('sales')
+                        ->join('sales_items', 'sales.id', '=', 'sales_items.sales_id')
+                        ->select('sales.id', 'sales_items.product_id', 
+                        'sales_items.name_product', 'sales_items.id as vendasItens_id',
+                        DB::raw('SUM(sales_items.amount) as quantidade'),
+                        DB::raw('SUM(sales_items.price) as preço'),
+                        DB::raw('SUM(sales_items.amount * sales_items.price) as total'))
+                        ->groupBy('sales.id', 'sales_items.id', 'sales_items.product_id', 'sales_items.name_product')
+                        ->where('sales.id', $id)
+                        ->get();
         $bloquetes_venda = Bloquete::where('sales_id', $id)->first();
         $cliente_vendas = $venda->client()->get();
         $produtos = Product::all();
         $stores = Store::all();
         $pagamentos = Pagamento::all();
         $clientes = Client::all();
+
+        // echo json_encode($bloquetes_venda);
+        // return;
 
         return view('cadastro_vendas_editar', compact(
             'venda',

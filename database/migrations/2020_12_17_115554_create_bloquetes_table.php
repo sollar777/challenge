@@ -17,6 +17,7 @@ class CreateBloquetesTable extends Migration
             $table->bigIncrements("id");
             $table->unsignedBigInteger("sales_id");
 
+            $table->integer("pagamento_id");
             $table->string("description");
             $table->decimal("valor_parcela", 10, 2);
 

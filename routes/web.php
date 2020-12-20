@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PagamentosController;
 use App\Http\Controllers\VendasController;
 use App\Http\Controllers\VendasEfetuadasController;
 use Illuminate\Support\Facades\Auth;
@@ -51,10 +52,6 @@ Route::prefix('/')->name('grupo.')->namespace('grupos')->group(function () {
     Route::delete('/grupos/deletar/{id}', [GroupController::class, 'destroy'])->name('excluir');
 });
 
-
-
-
-
 //clientes
 
 Route::prefix('/')->name('clientes.')->namespace('clientes')->group(function () {
@@ -94,6 +91,12 @@ Route::prefix('/vendas/produtos')->name('vendas.produtos.')->namespace('vendas/p
     Route::delete('/deletar/{id}', [VendasEfetuadasController::class, 'destroy'])->name('deletar');
     Route::get('/editar/{id}', [VendasEfetuadasController::class, 'edit'])->name('editar');
     Route::put('/editar/{id}', [VendasEfetuadasController::class, 'update'])->name('atualizar');
+
+});
+
+Route::prefix('/pagamentos')->name('pagamentos.')->namespace('pagamentos')->group(function(){
+
+    Route::get('/exibir', [PagamentosController::class, 'buscarPagamento'])->name('exibir');
 
 });
 

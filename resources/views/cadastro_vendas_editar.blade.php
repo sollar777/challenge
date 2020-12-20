@@ -74,7 +74,7 @@
 
     </form>
 
-    <form action="" method="post" class="form_vandas_itens_editar">
+    <form action="" method="post" class="form_vandas_itens">
         @csrf
         <input type="hidden" name="id" value="" class="modal-produto-editarId">
         <div class="row">
@@ -104,7 +104,7 @@
             </div>
 
             <div class="col-md-2">
-                <input type="hidden" name="id" value="0" class="btn_id_vendas">
+                <input type="hidden" name="id" value="{{$venda->id}}" class="btn_id_vendas">
                 <button type="submit" class="btn btn-sm btn-success form-control" id="btn-itens-vendas">
                     Adicionar
                 </button>
@@ -131,7 +131,23 @@
             <form action="" method="">
                 <input type="hidden" name="_token" class="teste_modal" value="{{ csrf_token() }}">
                 <tbody id="tr-lista-produtos-vendas">
-
+                    @foreach ($vendas_itens as $venda)
+                        <tr>
+                            <td>{{$venda->name_product}}</td>
+                            <td>{{$venda->quantidade}}</td>
+                            <td>{{$venda->preço}}</td>
+                            <td>{{$venda->total}}</td>
+                            <td>
+                                <a href="javascript:modalEditarProduto({{$venda->vendasItens_id}})" onclick="modalEditarProduto({{$venda->vendasItens_id}})" 
+                                    class="fas fa-edit btn btn-primary btn-modal-vendas-edit" 
+                                    data-toggle="modal" data-target="#modalVendaEditProduct">
+                                </a>
+                                <button type="submit" onclick="modalRemoverProduto({{$venda->vendasItens_id}})" 
+                                    class="fas fa-trash-alt btn btn-danger btn-modal-vendas-excluir">
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </form>
         </table>
@@ -174,8 +190,12 @@
             <div class="row">
                 <div class="col-md-4">
                     <label class="form-group">Forma de Pagamento</label>
-                    <select name="formaPagamento" id="" class="form-control select-forma-pagamento">
-                            <option value="{{$bloquetes_venda->id}}">{{$bloquetes_venda->description}}</option>   
+                    <select name="formaPagamento" id="" class="form-control select-forma-pagamento select-forma-pagamento-editar">
+                           @if ($bloquetes_venda)
+                                <option value="{{$bloquetes_venda->pagamento_id}}">{{$bloquetes_venda->description}}</option>
+                           @else
+                                <option value="0"></option>
+                            @endif
                     </select>
                 </div>
                 <div class="col-md-3">
