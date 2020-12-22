@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
 
@@ -62,13 +62,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success btn-enviar-vendas btn-vendas form-control" disabled>
+                    Salvar
+                </button>
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-success btn-enviar-vendas btn-vendas form-control">Salvar</button>
+                <button type="submit" class="btn btn-primary btn-editar-vendas btn-vendas form-control">
+                    Editar
+                </button>
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-danger btn-cancelar-vendas btn-vendas form-control">Cancelar</button>
+                <button type="submit" class="btn btn-danger btn-cancelar-vendas btn-vendas form-control">
+                    Cancelar
+                </button>
             </div>
         </div>
 

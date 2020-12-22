@@ -1,8 +1,20 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
 
-<h1 class="h1-cliente">Lista de Clientes</h1>
+<div class="row">
+    <div class="col">
+        <h1 class="h1-cliente">Lista de Clientes</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4">
+        <a href="{{route('clientes.criar')}}" class="btn btn-success a-lista-clientes form-control">Cadastrar Cliente</a>
+    </div>
+</div>
+
 
 <div class="alert alert-danger d-none messageBox-clientRemove" role="alert"></div>
 

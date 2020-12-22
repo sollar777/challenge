@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+.a-lista-vendas {
+  margin-bottom: 1rem;
+}
+
 .vendas-listagem {
   margin-bottom: 2rem;
 }
@@ -115,10 +119,29 @@
   margin-top: 2rem;
 }
 
+.a-lista-clientes {
+  margin-bottom: 1rem;
+}
+
 .h1-grupo {
   margin-top: 3rem;
   margin-bottom: 3rem;
   text-align: center;
+}
+
+.a-lista-grupos {
+  margin-bottom: 1rem;
+}
+
+.h1-lista-produtos {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.a-lista-produtos {
+  margin-bottom: 1rem;
 }
 
 /*!

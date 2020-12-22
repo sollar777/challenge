@@ -13,6 +13,7 @@ class PagamentosController extends Controller
     public function __construct(Pagamento $pagamento)
     {
         $this->pagamentos = $pagamento;
+        $this->middleware('auth');
     }
 
     public function buscarPagamento()

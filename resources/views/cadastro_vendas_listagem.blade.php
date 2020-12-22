@@ -1,8 +1,19 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
 
-    <h1 class="h1-vendas">Listagem de Vendas</h1>
+    <div class="row">
+        <div class="col">
+            <h1 class="h1-vendas">Listagem de Vendas</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+            <a href="{{route('vendas.criar')}}" class="btn btn-success a-lista-vendas form-control">Cadastro de Vendas</a>
+        </div>
+    </div>
 
     <table class="table table-striped vendas-listagem">
         <thead>

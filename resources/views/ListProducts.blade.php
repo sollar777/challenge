@@ -1,8 +1,19 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
 
-    <h1>Lista de Produtos</h1>
+    <div class="row">
+        <div class="col">
+            <h1 class="h1-lista-produtos">Lista de Produtos</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+            <a href="{{route('produto.criar')}}" class="btn btn-success form-control a-lista-produtos">Cadastrar Produto</a>
+        </div>
+    </div>
+    
 
     <div class="alert alert-danger d-none messageBox-product-remove" role="alert"></div>
 

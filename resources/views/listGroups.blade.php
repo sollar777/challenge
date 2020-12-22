@@ -1,8 +1,19 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
 
-<h1 class="h1-grupo">Listagem dos Grupos</h1>
+<div class="row">
+    <div class="col">
+        <h1 class="h1-grupo">Listagem dos Grupos</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-4">
+        <a href="{{route('grupo.criar')}}" class="btn btn-success a-lista-grupos form-control">Cadastro de Grupo</a>
+    </div>
+</div>
 
 <table class="table table-striped">
 

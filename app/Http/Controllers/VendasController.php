@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\DB;
 class VendasController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $vendas = DB::table('sales')
@@ -36,6 +41,7 @@ class VendasController extends Controller
                 DB::raw('SUM((sales_items.amount * sales_items.price) - sales.discount) as total_venda')
             )
             ->groupBy('sales.id', 'sales.discount', 'users.name', 'sales.date', 'clients.name', 'stores.name')
+            ->orderByDesc("sales.date")
             ->simplePaginate(10);
 
 

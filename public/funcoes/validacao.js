@@ -12,7 +12,7 @@ $(".form_group").on("submit", function (e) {
         data: $(this).serialize(),
         dataType: 'json',
         success: function (response) {
-            if (response.success === true) {
+            if (response[0].success === true) {
                 window.location.href = "/grupos";
             } else {
                 alert('error');
@@ -40,7 +40,7 @@ $(".btn_excluir").on("click", function (e) {
         data: $(this).serialize(),
         dataType: 'json',
         success: function (response) {
-            if (response.success === true) {
+            if (response[0].success === true) {
                 window.location.href = "/grupos";
             } else {
                 $(".messageBox").removeClass('d-none').html(response.message);
@@ -454,6 +454,7 @@ $(".form_vandas_itens").on("submit", function (e) {
     e.preventDefault();
 
     itens_vendas(popular_lista_vendas_itens);
+    $(".btn-salvar-produtos").attr("disabled", false);
 
 })
 
@@ -512,6 +513,8 @@ $(".btn-salvar-produtos").on("click", function (e) {
             if (element.length > 0) {
                 calcularSubTotal(element);
                 desativarBotaoProdutos();
+                $(".select-forma-pagamento-editar").val(0)
+                $(".select-forma-pagamento-editar option:selected").text("")
             }
         })
     }).fail(function (e) {
@@ -639,7 +642,7 @@ function popularSelectPagamento(data, id = 0, name = "") {
     $(".select-forma-pagamento-editar option").remove();
     var cols = ""
     if (id == 0) {
-        cols = '<option value=0>' + '' + '</option>'
+        cols = '<option value=0></option>'
         $.each(data, function (e) {
             cols += "<option value='" + data[e].id + "'>" + data[e].name + "</option>"
         })
@@ -654,5 +657,18 @@ function popularSelectPagamento(data, id = 0, name = "") {
         $(".select-forma-pagamento-editar").append(cols);
     }
 }
+
+$(".btn-editar-vendas").on("click", function (e) { 
+    e.preventDefault();
+    liberarVenda();
+ })
+
+function bloquearVenda(){
+
+}
+
+function liberarVenda() { 
+    
+ }
 
 //-----------faltando salvar a forma de pagamento -----------------
