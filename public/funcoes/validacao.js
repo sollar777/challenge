@@ -1,5 +1,6 @@
 $("#CPF").mask('000.000.000-00');
 $(".money").mask('#.##0,00', { reverse: true });
+$("#cep").mask('00000-000');
 
 // cadastrar grupos
 
@@ -51,6 +52,29 @@ $(".btn_excluir").on("click", function (e) {
 // ------------ fim grupo ------------------------
 
 // -------------------clientes cadastro----------
+
+$(".cep-cad-cliente").on("change", function () { 
+    var cep = $(this).val();
+
+    var validacao_cep = /[^0-9]/;
+    var cep_tratado = cep.replace(validacao_cep.exec(cep), "")
+
+    if(cep_tratado > 0){
+        $.ajax({
+            url: "/buscar/cep/" + cep_tratado,
+            type: "get",
+            dataType: "json"
+        }).done(function (data) { 
+            $.each(data, function (e) { 
+                $(".end-cad-cliente").val(data[e].logradouro)
+                $(".cidade-cad-cliente").val(data[e].localidade)
+                $(".uf-cad-cliente").val(data[e].uf)
+             })
+         }).fail(function (e) { 
+             console.log("erro: " + e)
+          })
+    }
+ })
 
 $(".form_client").on("submit", function (e) {
     e.preventDefault();
@@ -115,7 +139,7 @@ $(".teste-form").on("submit", function (e) {
         data: $(this).serialize(),
         dataType: 'json',
         success: function (response) {
-            if (response.success === true) {
+            if (response[0].success === true) {
                 window.location.href = "/clientes";
             } else {
                 $(".messageBox-clientRemove").removeClass("d-none").html(response.message);

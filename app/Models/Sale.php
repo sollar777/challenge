@@ -14,9 +14,12 @@ class Sale extends Model
     protected $fillable = [
         'store_id',
         'user_id',
+        'clients_id',
         'obs',
         'date',
-        'discount'
+        'discount',
+        'salvo',
+        'cancelado'
     ];
 
     public function client()

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuscaCepController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GroupController;
@@ -24,6 +25,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('layouts.app');
 });
+
+Route::get('/buscar/cep/{cep}', [BuscaCepController::class, 'buscarCep']);
 
 //produtos
 

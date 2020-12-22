@@ -20,21 +20,25 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-2">
+                <label>Cep</label>
+                <input type="text" name="cep" class="form-control cep-cad-cliente" value="" id="cep">
+            </div>
+            <div class="col-md-4">
                 <label>Endereço</label>
-                <input type="text" name="street" class="form-control" value="">
+                <input type="text" name="street" class="form-control end-cad-cliente" value="">
             </div>
             <div class="col-md-2">
                 <label>Numero</label>
-                <input type="text" name="number" class="form-control" value="">
+                <input type="text" name="number" class="form-control numero-cad-cliente" value="">
             </div>
             <div class="col-md-2">
                 <label>Cidade</label>
-                <input type="text" name="city" class="form-control" value="">
+                <input type="text" name="city" class="form-control cidade-cad-cliente" value="">
             </div>
             <div class="col-md-2">
                 <label>Estado</label>
-                <input type="text" name="state" class="form-control" value="">
+                <input type="text" name="state" class="form-control uf-cad-cliente" value="">
             </div>
         </div>
 

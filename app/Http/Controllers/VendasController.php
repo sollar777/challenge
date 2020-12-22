@@ -41,7 +41,7 @@ class VendasController extends Controller
                 DB::raw('SUM((sales_items.amount * sales_items.price) - sales.discount) as total_venda')
             )
             ->groupBy('sales.id', 'sales.discount', 'users.name', 'sales.date', 'clients.name', 'stores.name')
-            ->orderByDesc("sales.date")
+            ->orderByDesc("sales.id")
             ->simplePaginate(10);
 
 
@@ -84,12 +84,16 @@ class VendasController extends Controller
             $dados = $request->all();
             $client = Client::find($dados['clients_id']);
 
+            // return response()->json($client);
+
             $result = $client->sales()->create([
                 'store_id' => $dados['store_id'],
                 'user_id' => $dados['user_id'],
                 'obs' => $dados['obs'],
                 'date' => $dados['date'],
                 'discount' => 0,
+                'salvo' => 0,
+                'cancelado' => 0
             ]);
 
             $result['success'] = true;
