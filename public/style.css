@@ -10,6 +10,30 @@
   margin-bottom: 1rem;
 }
 
+.check-editar-venda {
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+  vertical-align: middle;
+  position: relative;
+}
+
+.lb-finalizada-editar {
+  margin-top: 0.3rem;
+  font: 20px Lucida;
+}
+
+.check-cencelar-venda {
+  margin-left: 2rem;
+  margin-right: 1rem;
+  vertical-align: middle;
+  position: relative;
+}
+
+.lb-cancelado-editar {
+  margin-top: 0.3rem;
+  font: 20px Lucida;
+}
+
 .vendas-listagem {
   margin-bottom: 2rem;
 }
@@ -49,6 +73,10 @@
 #codVenda {
   border: none;
   font-size: 30px;
+}
+
+.btn-itens-editar {
+  margin-top: 22rem;
 }
 
 #tot {

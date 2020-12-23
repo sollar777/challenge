@@ -7,6 +7,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagamentosController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\VendasController;
 use App\Http\Controllers\VendasEfetuadasController;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,12 @@ Route::get('/', function () {
 });
 
 Route::get('/buscar/cep/{cep}', [BuscaCepController::class, 'buscarCep']);
+
+//stores
+
+Route::get('/empresa', [StoreController::class, 'index'])->name('empresa.listar');
+Route::get('/empresa/criar', [StoreController::class, 'create'])->name('empresa.criar');
+Route::post('/empresa/criar', [StoreController::class, 'store'])->name('empresa.enviar');
 
 //produtos
 

@@ -9,7 +9,14 @@
 
         <div class="row div-row-1-vendas">
             <div class="col-md-8">
-
+                <input type="checkbox" name="finalizada" class="check-editar-venda" id="" disabled>
+                <label class="lb-finalizada-editar">
+                    Venda salva
+                </label>
+                <input type="checkbox" name="cancelado" class="check-cencelar-venda" id="" disabled>
+                <label class="lb-cancelado-editar">
+                    Cancelado
+                </label>
             </div>
             <div class="col-md-4">
                 <div class="row">
@@ -113,7 +120,7 @@
 
             <div class="col-md-2">
                 <input type="hidden" name="id" value="{{$venda->id}}" class="btn_id_vendas">
-                <button type="submit" class="btn btn-sm btn-success form-control" id="btn-itens-vendas">
+                <button type="submit" class="btn btn-sm btn-success form-control btn-itens-editar" id="btn-itens-vendas">
                     Adicionar
                 </button>
             </div>

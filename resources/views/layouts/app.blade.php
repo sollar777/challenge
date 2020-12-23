@@ -36,6 +36,9 @@
                                 <a class="dropdown-item" href="{{ route('clientes.exibir') }}">
                                     Cliente
                                 </a>
+                                <a class="dropdown-item" href="{{ route('empresa.listar') }}">
+                                    Empresas
+                                </a>
                                 <a class="dropdown-item" href="{{ route('produto.exibir') }}">
                                     Produtos
                                 </a>
