@@ -2,6 +2,8 @@
 
 @section('content')
 
+<input type="hidden" value="{{url('/')}}" id="url_grupo" name="url">
+
 <div class="row">
     <div class="col">
         <h1 class="h1-grupo">Listagem dos Grupos</h1>

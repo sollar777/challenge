@@ -3,6 +3,8 @@
 
 @section('content')
 
+    <input type="hidden" value="{{url('/')}}" id="url_grupo" name="url">
+
     <h1>Criar Grupo</h1>
     <form action="{{ route('grupo.enviar') }}" method="post" class="form_group">
         @csrf

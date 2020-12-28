@@ -7,6 +7,8 @@
 
 <div class="alert alert-danger d-none messageBox-product-update" role="alert"></div>
 
+<input type="hidden" value="{{url('/')}}" id="url_produto" name="url">
+
 <form action="{{route('produto.edit', ['id' => $product->id])}}" method="post" class="form-edit" id="{{$product->id}}">
     @csrf
     @method('PUT')

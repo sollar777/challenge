@@ -2,6 +2,8 @@
 
 @section('content')
 
+<input type="hidden" value="{{url('/')}}" id="url_produto" name="url">
+
     <div class="row">
         <div class="col">
             <h1 class="h1-lista-produtos">Lista de Produtos</h1>

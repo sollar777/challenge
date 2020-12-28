@@ -4,11 +4,13 @@ $("#cep").mask('00000-000');
 
 // cadastrar grupos
 
+const getUrlGrupo = $("#url_grupo").val()
+
 $(".form_group").on("submit", function (e) {
     e.preventDefault();
 
     $.ajax({
-        url: "/grupos/criar",
+        url: getUrlGrupo + "/grupos/criar",
         type: "post",
         data: $(this).serialize(),
         dataType: 'json',
@@ -36,7 +38,7 @@ $(".btn_excluir").on("click", function (e) {
     });
 
     $.ajax({
-        url: "/grupos/deletar/" + id,
+        url: getUrlGrupo + "/grupos/deletar/" + id,
         type: "delete",
         data: $(this).serialize(),
         dataType: 'json',
@@ -53,6 +55,8 @@ $(".btn_excluir").on("click", function (e) {
 
 // -------------------clientes cadastro----------
 
+const getUrlCliente = $("#url_venda").val()
+
 $(".cep-cad-cliente").on("change", function () { 
     var cep = $(this).val();
 
@@ -61,7 +65,7 @@ $(".cep-cad-cliente").on("change", function () {
 
     if(cep_tratado > 0){
         $.ajax({
-            url: "/buscar/cep/" + cep_tratado,
+            url: getUrlCliente + "/buscar/cep/" + cep_tratado,
             type: "get",
             dataType: "json"
         }).done(function (data) { 
@@ -80,7 +84,7 @@ $(".form_client").on("submit", function (e) {
     e.preventDefault();
 
     $.ajax({
-        url: "/clientes/create",
+        url: getUrlCliente + "/clientes/create",
         type: "post",
         data: $(this).serialize(),
         dataType: 'json',
@@ -106,7 +110,7 @@ $(".form_client_edit").on("submit", function (e) {
     })
 
     $.ajax({
-        url: "/clientes/edit/" + id,
+        url: getUrlCliente + "/clientes/edit/" + id,
         type: "put",
         data: $(this).serialize(),
         dataType: 'json',
@@ -134,7 +138,7 @@ $(".teste-form").on("submit", function (e) {
     var id = $(this).attr("value");
 
     $.ajax({
-        url: "/clientes/destroy/" + id,
+        url: getUrlCliente + "/clientes/destroy/" + id,
         type: "delete",
         data: $(this).serialize(),
         dataType: 'json',
@@ -153,11 +157,13 @@ $(".teste-form").on("submit", function (e) {
 
 //----- produtos cadastro---------
 
+const getUrlProduto = $("#url_produto").val()
+
 $(".form-product-store").on("submit", function (e) {
     e.preventDefault();
 
     $.ajax({
-        url: "/produtos/criar",
+        url: getUrlProduto + "/produtos/criar",
         type: "post",
         data: $(this).serialize(),
         dataType: 'json',
@@ -189,7 +195,7 @@ $(".form-edit").on("submit", function (e) {
     })
 
     $.ajax({
-        url: "/produtos/edit/" + id,
+        url: getUrlProduto + "/produtos/edit/" + id,
         type: "put",
         data: {
             name: name,
@@ -222,7 +228,7 @@ $(".btn-remove").on("click", function (e) {
     })
 
     $.ajax({
-        url: "/produtos/destroy/" + id,
+        url: getUrlProduto + "/produtos/destroy/" + id,
         type: "delete",
         data: $(this).serialize(),
         dataType: 'json',
@@ -243,6 +249,7 @@ $(".btn-remove").on("click", function (e) {
 //------------- cadastro de vendas----------------
 
 var totalVenda = 0;
+const getUrlVendas = $("#url_venda").val()
 
 $(".form_vendas_criar").on("submit", function (e) {
     e.preventDefault();
@@ -251,7 +258,7 @@ $(".form_vendas_criar").on("submit", function (e) {
     if ($(".btn_id_vendas").val() == 0) {
 
         $.ajax({
-            url: "/vendas/criar",
+            url: getUrlVendas + "/vendas/criar",
             type: 'post',
             data: $(this).serialize(),
             dataType: 'json',
@@ -281,7 +288,7 @@ $(".select-produtos-vendas").on("change", function (e) {
         var id = $(this).val();
 
         $.ajax({
-            url: "/produtos/pesquisa/ajax/" + id,
+            url: getUrlVendas + "/produtos/pesquisa/ajax/" + id,
             type: "get",
             dataType: 'json',
             success: function (response) {
@@ -348,7 +355,7 @@ function itens_vendas(callback) {
         })
 
         $.ajax({
-            url: "/vendas/produtos/criar",
+            url: getUrlVendas + "/vendas/produtos/criar",
             type: "post",
             data: {
                 venda_id: venda_id,
@@ -368,7 +375,7 @@ function itens_vendas(callback) {
 function modalEditarProduto(idvenda) {
     var id = idvenda;
     $.ajax({
-        url: "/vendas/produtos/editar/" + id,
+        url: getUrlVendas + "/vendas/produtos/editar/" + id,
         type: "get",
         dataType: "json",
         success: function (response) {
@@ -433,7 +440,7 @@ function modalRemoverProduto(idProdutoVenda) {
     })
 
     $.ajax({
-        url: "/vendas/produtos/deletar/" + id,
+        url: getUrlVendas + "/vendas/produtos/deletar/" + id,
         type: "delete",
         dataType: "json",
         success: function (response) {
@@ -500,7 +507,7 @@ $(".form-modal-editar-item-venda").on("submit", function (e) {
     })
 
     $.ajax({
-        url: "/vendas/produtos/editar/" + id,
+        url: getUrlVendas + "/vendas/produtos/editar/" + id,
         type: "put",
         data: {
             product_id: product_id,
@@ -530,7 +537,7 @@ $(".btn-salvar-produtos").on("click", function (e) {
     var id = $("#codVenda").html();
 
     $.ajax({
-        url: "/vendas/produtos/buscar/total/" + id,
+        url: getUrlVendas + "/vendas/produtos/buscar/total/" + id,
         type: "get",
         dataType: "json"
     }).done(function (data) {
@@ -636,7 +643,7 @@ $(".select-forma-pagamento-editar").one("click", function (e) {
 
     if ($(this).val() == "0") {
         $.ajax({
-            url: "/pagamentos/exibir",
+            url: getUrlVendas + "/pagamentos/exibir",
             data: "get",
             dataType: 'json'
         }).done(function (data) {
@@ -648,7 +655,7 @@ $(".select-forma-pagamento-editar").one("click", function (e) {
         })
     } else {
         $.ajax({
-            url: "/pagamentos/exibir",
+            url: getUrlVendas + "/pagamentos/exibir",
             data: "get",
             dataType: 'json'
         }).done(function (data) {

@@ -9,6 +9,7 @@ services:
     volumes:
       - /var/lib/mysql:/var/lib/mysql
     environment:
+      MYSQL_DATABASE: trilha
       MYSQL_ROOT_PASSWORD: "1234"
     command: mysqld --sql-mode=NO_ENGINE_SUBSTITUTION
   php:

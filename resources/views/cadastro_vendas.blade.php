@@ -4,6 +4,8 @@
 
     <h1 class="titulo-vendas display-6">Cadastro de Vendas</h1>
 
+    <input type="hidden" value="{{url('/')}}" id="url_venda" name="url">
+
     <form action="" method="post" class="form_vendas_criar">
         @csrf
 

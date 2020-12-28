@@ -7,6 +7,8 @@
 
     <div class="alert alert-danger d-none messageBox-client" role="alert"></div>
 
+    <input type="hidden" value="{{url('/')}}" id="url_cliente" name="url">
+
     <form action="" method="" class="form_client">
         @csrf
         <div class="row">
