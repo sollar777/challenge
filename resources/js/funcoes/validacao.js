@@ -259,7 +259,7 @@ $(".form_vendas_criar").on("submit", function (e) {
                 if (response.success === true) {
                     codVenda = $("#codVenda").html(response.id);
                     if (codVenda.html() > 0) {
-                        $(".form_vandas_itens").removeClass('d-none');
+                        $(".form_vendas_itens").removeClass('d-none');
                         $(".div-lista-produtos-vendas").removeClass('d-none');
                         $(".div-forma-pagamento-venda").removeClass('d-none');
                         if ($(".btn_id_vendas").val() == 0) {
@@ -348,7 +348,7 @@ function itens_vendas(callback) {
         })
 
         $.ajax({
-            url: "/vendas/produtos/criar/",
+            url: "/vendas/produtos/criar",
             type: "post",
             data: {
                 venda_id: venda_id,
@@ -474,13 +474,14 @@ $(".btn-cancelar-vendas").on("click", function (e) {
 
 })
 
-$(".form_vandas_itens").on("submit", function (e) {
+$(".form_vendas_itens").on("submit", function (e) {
     e.preventDefault();
 
     itens_vendas(popular_lista_vendas_itens);
     $(".btn-salvar-produtos").attr("disabled", false);
 
 })
+
 
 $(".form-modal-editar-item-venda").on("submit", function (e) {
     e.preventDefault();

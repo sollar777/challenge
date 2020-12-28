@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-4">
                 <label>CPF/CNPJ</label>
-                <input type="text" name="cgc" class="form-control teste" id="CPF" value="">
+                <input type="text" name="cgc" class="form-control teste" id="" value="">
             </div>
         </div>
         <div class="row">

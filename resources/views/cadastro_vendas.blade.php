@@ -80,7 +80,7 @@
 
     </form>
 
-    <form action="" method="post" class="form_vandas_itens d-none">
+    <form action="" method="" class="form_vendas_itens d-none">
         @csrf
         <input type="hidden" name="id" value="" class="modal-produto-editarId">
         <div class="row">
@@ -114,11 +114,13 @@
                 <button type="submit" class="btn btn-sm btn-success form-control" id="btn-itens-vendas">
                     Adicionar
                 </button>
+                
             </div>
 
         </div>
 
     </form>
+
 
     <div class="div-lista-produtos-vendas d-none">
         <div id="linha"></div>

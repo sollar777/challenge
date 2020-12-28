@@ -51,6 +51,7 @@ class VendasEfetuadasController extends Controller
             $dados = $request->all();
             $sale = Sale::where('id', $dados['venda_id'])->first();
             $product = Product::where('id', $dados['product_id'])->first();
+            
             $sale->sales_items()->create([
                 'product_id'    => $dados['product_id'],
                 'name_product'  => $product['name'],
@@ -58,7 +59,6 @@ class VendasEfetuadasController extends Controller
                 'amount'        => $dados['amount']
             ]);
             $result = $sale->sales_items()->get();
-            //$result['success'] = true;
             return response()->json($result, 200);
         } catch (Exception $e) {
             return response()->json([
