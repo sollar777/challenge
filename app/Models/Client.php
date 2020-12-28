@@ -55,7 +55,7 @@ class Client extends Model
 
     public function setCgcAttribute($value)
     {
-        $this->attributes['cgc'] = str_replace('.', '', str_replace('-', '', $value));
+        $this->attributes['cgc'] = str_replace('.', '', str_replace('-', '', str_replace('/', '', $value)));
     }
 
     public function getCgcAttribute($value)

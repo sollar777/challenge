@@ -27,4 +27,9 @@ class Store extends Model
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value);
     }
+
+    public function setCgcAttribute($value)
+    {
+        $this->attributes['cgc'] = str_replace('.', '', str_replace('-', '', str_replace('/', '', $value)));
+    }
 }
