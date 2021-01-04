@@ -16,7 +16,7 @@ $(".form_group").on("submit", function (e) {
         dataType: 'json',
         success: function (response) {
             if (response[0].success === true) {
-                window.location.href = "/grupos";
+                window.location.href = getUrlGrupo + "/grupos";
             } else {
                 alert('error');
             }
@@ -44,7 +44,7 @@ $(".btn_excluir").on("click", function (e) {
         dataType: 'json',
         success: function (response) {
             if (response[0].success === true) {
-                window.location.href = "/grupos";
+                window.location.href = getUrlGrupo + "/grupos";
             } else {
                 $(".messageBox").removeClass('d-none').html(response.message);
             }
@@ -55,7 +55,7 @@ $(".btn_excluir").on("click", function (e) {
 
 // -------------------clientes cadastro----------
 
-const getUrlCliente = $("#url_venda").val()
+const getUrlCliente = $("#url_cliente").val()
 
 $(".cep-cad-cliente").on("change", function () { 
     var cep = $(this).val();
@@ -90,7 +90,7 @@ $(".form_client").on("submit", function (e) {
         dataType: 'json',
         success: function (response) {
             if (response[0].success === true) {
-                window.location.href = "/clientes";
+                window.location.href = getUrlCliente +  "/clientes";
             } else {
                 $(".messageBox-client").removeClass("d-none").html("erro ao cadastrar o cliente!");
             }
@@ -116,7 +116,7 @@ $(".form_client_edit").on("submit", function (e) {
         dataType: 'json',
         success: function (response) {
             if (response[0].success === true) {
-                window.location.href = "/clientes";
+                window.location.href = getUrlCliente + "/clientes";
             } else {
                 $(".messageBox-clientEdit").removeClass("d-none").html("erro ao editar o cliente: " + response[0].erro);
             }
@@ -144,7 +144,7 @@ $(".teste-form").on("submit", function (e) {
         dataType: 'json',
         success: function (response) {
             if (response[0].success === true) {
-                window.location.href = "/clientes";
+                window.location.href = getUrlCliente + "/clientes";
             } else {
                 $(".messageBox-clientRemove").removeClass("d-none").html(response.message);
             }
@@ -169,7 +169,7 @@ $(".form-product-store").on("submit", function (e) {
         dataType: 'json',
         success: function (response) {
             if (response.success === true) {
-                window.location.href = "/produtos/exibir";
+                window.location.href = getUrlProduto + "/produtos/exibir";
             } else {
                 $(".messageBox-product-store").removeClass("d-none").html(response.erro);
             }
@@ -208,7 +208,7 @@ $(".form-edit").on("submit", function (e) {
         dataType: 'json',
         success: function (response) {
             if (response.success === true) {
-                window.location.href = "/produtos/exibir"
+                window.location.href = getUrlProduto + "/produtos/exibir"
             } else {
                 $(".messageBox-product-update").removeClass("d-none").html(response.erro);
             }
@@ -234,7 +234,7 @@ $(".btn-remove").on("click", function (e) {
         dataType: 'json',
         success: function (response) {
             if (response.success === true) {
-                window.location.href = "/produtos/exibir"
+                window.location.href = getUrlProduto + "/produtos/exibir"
             } else {
                 $(".messageBox-product-remove").removeClass("d-none").html(response.erro);
             }
