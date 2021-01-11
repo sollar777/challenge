@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRules;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\User;
@@ -47,8 +48,10 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRules $request)
     {
+        $response['success'] = false;
+
         try{
         $data = $request->all();
 
@@ -105,6 +108,8 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $response['success'] = false;
+        
         try {
 
             $client = $this->client->find($id);

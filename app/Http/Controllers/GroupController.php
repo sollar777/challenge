@@ -44,6 +44,8 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+        $response['success'] = false;
+        
         try {
             $dados = $request->all();
 
