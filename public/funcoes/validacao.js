@@ -80,49 +80,49 @@ $(".cep-cad-cliente").on("change", function () {
     }
  })
 
-$(".form_client").on("submit", function (e) {
-    e.preventDefault();
+// $(".form_client").on("submit", function (e) {
+//     e.preventDefault();
 
-    $.ajax({
-        url: getUrlCliente + "/clientes/create",
-        type: "post",
-        data: $(this).serialize(),
-        dataType: 'json',
-        success: function (response) {
-            if (response[0].success === true) {
-                window.location.href = getUrlCliente +  "/clientes";
-            } else {
-                $(".messageBox-client").removeClass("d-none").html("erro ao cadastrar o cliente!");
-            }
-        }
-    })
-})
+//     $.ajax({
+//         url: getUrlCliente + "/clientes/create",
+//         type: "post",
+//         data: $(this).serialize(),
+//         dataType: 'json',
+//         success: function (response) {
+//             if (response[0].success === true) {
+//                 window.location.href = getUrlCliente +  "/clientes";
+//             } else {
+//                 $(".messageBox-client").removeClass("d-none").html("erro ao cadastrar o cliente!");
+//             }
+//         }
+//     })
+// })
 
-$(".form_client_edit").on("submit", function (e) {
-    e.preventDefault();
+// $(".form_client_edit").on("submit", function (e) {
+//     e.preventDefault();
 
-    var id = $(".btn-editar-client").attr('value');
+//     var id = $(".btn-editar-client").attr('value');
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $("input[name=_token").val()
-        }
-    })
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $("input[name=_token").val()
+//         }
+//     })
 
-    $.ajax({
-        url: getUrlCliente + "/clientes/edit/" + id,
-        type: "put",
-        data: $(this).serialize(),
-        dataType: 'json',
-        success: function (response) {
-            if (response[0].success === true) {
-                window.location.href = getUrlCliente + "/clientes";
-            } else {
-                $(".messageBox-clientEdit").removeClass("d-none").html("erro ao editar o cliente: " + response[0].erro);
-            }
-        }
-    })
-})
+//     $.ajax({
+//         url: getUrlCliente + "/clientes/edit/" + id,
+//         type: "put",
+//         data: $(this).serialize(),
+//         dataType: 'json',
+//         success: function (response) {
+//             if (response[0].success === true) {
+//                 window.location.href = getUrlCliente + "/clientes";
+//             } else {
+//                 $(".messageBox-clientEdit").removeClass("d-none").html("erro ao editar o cliente: " + response[0].erro);
+//             }
+//         }
+//     })
+// })
 
 //------clientes remover-------------
 

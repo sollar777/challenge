@@ -13,7 +13,7 @@ class ClientRules extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,18 @@ class ClientRules extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'phone' => 'required',
+            'cgc' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'O campo :attribute é obrigatório',
+            'name.required' => 'O campo nome é obrigatório',
+            'phone.required' => 'O campo telefone é obrigatório'
         ];
     }
 }

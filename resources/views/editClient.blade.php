@@ -9,8 +9,9 @@
 
     <input type="hidden" value="{{url('/')}}" id="url_cliente" name="url">
 
-    <form action="" method="" class="form_client_edit">
+    <form action="{{route('clientes.atualizar', ['id' => $client->id])}}" method="post" class="form_client_edit">
         @csrf
+        @method('put')
         <div class="row">
             <div class="col-md-8">
                 <label>Nome do Cliente</label>

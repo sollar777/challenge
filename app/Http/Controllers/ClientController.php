@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
@@ -50,7 +51,6 @@ class ClientController extends Controller
      */
     public function store(ClientRules $request)
     {
-        $response['success'] = false;
 
         try{
         $data = $request->all();
@@ -66,10 +66,9 @@ class ClientController extends Controller
             'state' => $data['state']
         ]);
 
-        $response['success'] = true;
-        return response()->json([$response], 200);
+        return redirect()->route('clientes.exibir');
         }catch(Exception $e){
-            return response()->json([$response], 403);
+            return view('clientes.exibir', compact('e'));
         }
 
     }
@@ -106,9 +105,8 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClientRules $request, $id)
     {
-        $response['success'] = false;
         
         try {
 
@@ -124,12 +122,9 @@ class ClientController extends Controller
                 'state' => $data['state']
             ]);
 
-            $response['success'] = true;
-            return response()->json([$response], 200);
+            return redirect()->route('clientes.exibir');
         } catch (Exception $e) {
-            $response['success'] = false;
-            $response['message'] = "erro" + $e;
-            return response()->json([$response], 403);
+            return view('clientes.exibir', compact('e'));
         }
 
         //return redirect()->route('cliente.exibir');
