@@ -489,6 +489,14 @@ $(".form_vendas_itens").on("submit", function (e) {
 
 })
 
+$(".form_vendas_itens_editar").on("submit", function (e) {
+    e.preventDefault();
+
+    itens_vendas(popular_lista_vendas_itens);
+    $(".btn-salvar-produtos").attr("disabled", false);
+
+})
+
 
 $(".form-modal-editar-item-venda").on("submit", function (e) {
     e.preventDefault();

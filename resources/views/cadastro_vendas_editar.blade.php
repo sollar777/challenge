@@ -90,7 +90,7 @@
 
     </form>
 
-    <form action="" method="post" class="form_vandas_itens">
+    <form action="" method="" class="form_vendas_itens_editar">
         @csrf
         <input type="hidden" name="id" value="" class="modal-produto-editarId">
         <div class="row">
@@ -121,7 +121,7 @@
 
             <div class="col-md-2">
                 <input type="hidden" name="id" value="{{$venda->id}}" class="btn_id_vendas">
-                <button type="submit" class="btn btn-sm btn-success form-control btn-itens-editar" id="btn-itens-vendas">
+                <button type="submit" class="btn btn-sm btn-success form-control btn-itens-editar2" id="btn-itens-vendas2">
                     Adicionar
                 </button>
             </div>
