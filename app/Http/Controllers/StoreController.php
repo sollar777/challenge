@@ -10,12 +10,12 @@ class StoreController extends Controller
     public function index()
     {
         $empresas = Store::all();
-        return view('empresa_listagem', compact('empresas'));
+        return view('empresa.empresa_listagem', compact('empresas'));
     }
 
     public function create()
     {
-        return view('cadastro_empresa');
+        return view('empresa.cadastro_empresa');
     }
 
     public function store(Request $request)

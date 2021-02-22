@@ -28,7 +28,7 @@ class ClientController extends Controller
     {
         $clients = $this->client->all();
 
-        return view('listClients', compact('clients'));
+        return view('cliente.listClients', compact('clients'));
     }
 
     /**
@@ -40,7 +40,7 @@ class ClientController extends Controller
     {
         $users = User::all();
 
-        return view('createClient', compact('users'));
+        return view('cliente.createClient', compact('users'));
     }
 
     /**
@@ -68,7 +68,7 @@ class ClientController extends Controller
 
         return redirect()->route('clientes.exibir');
         }catch(Exception $e){
-            return view('clientes.exibir', compact('e'));
+            return view('cliente.listClients', compact('e'));
         }
 
     }
@@ -95,7 +95,7 @@ class ClientController extends Controller
         $users = User::all();
         $address = $client->address()->first();
 
-        return view('editClient', compact(['address', 'users', 'client']));
+        return view('cliente.editClient', compact(['address', 'users', 'client']));
     }
 
     /**
@@ -124,7 +124,7 @@ class ClientController extends Controller
 
             return redirect()->route('clientes.exibir');
         } catch (Exception $e) {
-            return view('clientes.exibir', compact('e'));
+            return view('cliente.listClients', compact('e'));
         }
 
         //return redirect()->route('cliente.exibir');

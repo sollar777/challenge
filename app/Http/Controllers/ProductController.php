@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        return view('ListProducts', compact('products'));
+        return view('produtos.ListProducts', compact('products'));
     }
 
     /**
@@ -37,7 +37,7 @@ class ProductController extends Controller
 
         $groups = Group::all();
 
-        return view('creatProduct', compact('groups'));
+        return view('produtos.creatProduct', compact('groups'));
     }
 
     /**
@@ -83,7 +83,7 @@ class ProductController extends Controller
         $product = Product::where("id", $id)->first();
         $groups = Group::all();
 
-        return view('editProduct', compact('product', 'groups'));
+        return view('produtos.editProduct', compact('product', 'groups'));
     }
 
     /**

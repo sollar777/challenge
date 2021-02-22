@@ -17,7 +17,7 @@ services:
     container_name: 'php'
     restart: 'always'
     ports:
-      - "80:80"
+      - "8081:80"
     links:
       - db
       - redis

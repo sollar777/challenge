@@ -23,7 +23,7 @@ class GroupController extends Controller
     {
         $groups = Group::all();
 
-        return view('listGroups', compact('groups'));
+        return view('grupos.listGroups', compact('groups'));
     }
 
     /**
@@ -33,7 +33,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('createGroup');
+        return view('grupos.createGroup');
     }
 
     /**

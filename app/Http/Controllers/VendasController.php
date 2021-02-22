@@ -45,7 +45,7 @@ class VendasController extends Controller
             ->simplePaginate(10);
 
 
-        return view('cadastro_vendas_listagem', compact('vendas'));
+        return view('vendas.cadastro_vendas_listagem', compact('vendas'));
     }
 
     /**
@@ -62,7 +62,7 @@ class VendasController extends Controller
         $pagamentos = Pagamento::all();
         $data_atual = CarbonImmutable::now()->isoFormat('DD/MM/YYYY');
 
-        return view('cadastro_vendas', compact(
+        return view('vendas.cadastro_vendas', compact(
             'users',
             'stores',
             'clients',
@@ -135,7 +135,7 @@ class VendasController extends Controller
         // echo json_encode($bloquetes_venda);
         // return;
 
-        return view('cadastro_vendas_editar', compact(
+        return view('vendas.cadastro_vendas_editar', compact(
             'venda',
             'vendas_itens',
             'cliente_vendas',
